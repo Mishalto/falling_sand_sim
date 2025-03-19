@@ -1,6 +1,6 @@
 #include <Engine.hpp>
 
-Engine::Engine() : window_(sf::VideoMode({Resolution::width, Resolution::height}), "Falling sand simulator", sf::Style::None) {
+Engine::Engine() : window_(sf::VideoMode({Resolution::width, Resolution::height}), "Falling Sand Simulator", sf::Style::None) {
     window_.setFramerateLimit(fps_);
 }
 
@@ -20,5 +20,6 @@ void Engine::check_events() {
 
 void Engine::draw() {
     window_.clear();
+    window_.draw(sand_.get_grain());
     window_.display();
 }
