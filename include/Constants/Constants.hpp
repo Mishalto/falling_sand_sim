@@ -8,6 +8,10 @@ namespace Resolution {
 }
 
 namespace GrainStats {
-    const sf::Vector2f size = {100, 100};
+    const sf::Vector2f size = {5, 5};
     const sf::Color color = sf::Color(194, 178, 128);
+}
+
+namespace Physics {
+    const sf::Vector2f falling_speed = {0, 10};
 }

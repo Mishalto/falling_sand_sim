@@ -14,7 +14,7 @@ void Engine::start() {
 
 void Engine::update() {
     for (auto& grain : sand_.get_grains()) {
-        grain.get_grain().move({1, 1});
+        grain.get_grain().move(Physics::falling_speed);
     }
 }
 
