@@ -5,16 +5,20 @@ Engine::Engine() : window_(sf::VideoMode({Resolution::width, Resolution::height}
 }
 
 void Engine::start() {
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
     while (window_.isOpen()) {
-        while (const std::optional event = window_.pollEvent()) {
-            if (event->is<sf::Event::Closed>())
-                window_.close();
-        }
-
-    window_.clear();
-    window_.draw(shape);
-    window_.display();
+        check_events();
+        draw();
     }
+}
+
+void Engine::check_events() {
+    while (const std::optional event = window_.pollEvent()) {
+        if (event->is<sf::Event::Closed>())
+            window_.close();
+    }
+}
+
+void Engine::draw() {
+    window_.clear();
+    window_.display();
 }
