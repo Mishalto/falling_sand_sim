@@ -14,7 +14,7 @@ FetchContent_Declare(SFML
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
-add_executable(falling_sand_sim src/main.cpp src/Core/Engine.cpp)
+add_executable(falling_sand_sim src/main.cpp src/Core/Engine.cpp src/Core/Sand.cpp)
 
 target_link_libraries(falling_sand_sim PRIVATE SFML::Graphics)
 
