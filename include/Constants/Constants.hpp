@@ -8,7 +8,8 @@ namespace Resolution {
 }
 
 namespace GrainStats {
-    const sf::Vector2f size = {5, 5};
+    const float size = 5;
+    const sf::Vector2f size_2f = {size, size};
     const sf::Color color = sf::Color(194, 178, 128);
 }
 
