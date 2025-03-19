@@ -1,10 +1,10 @@
-#include <GameManager.hpp>
+#include <Engine.hpp>
 
-GameManager::GameManager() : window_(sf::VideoMode({Resolution::width, Resolution::height}), "Falling sand simulator", sf::Style::None) {
+Engine::Engine() : window_(sf::VideoMode({Resolution::width, Resolution::height}), "Falling sand simulator", sf::Style::None) {
     window_.setFramerateLimit(fps_);
 }
 
-void GameManager::start() {
+void Engine::start() {
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
     while (window_.isOpen()) {

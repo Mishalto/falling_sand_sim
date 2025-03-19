@@ -1,17 +1,16 @@
 #pragma once
 
-#include <iostream>
-
 #include <SFML/Graphics.hpp>
+
 #include <Constants/Constants.hpp>
 
-class GameManager {
+class Engine {
+
 private:
-    // Video
     sf::RenderWindow window_;
     const int fps_ = 60;
 public:
-    GameManager();
+    Engine();
 
     void start();
 };

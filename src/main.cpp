@@ -1,11 +1,11 @@
 #include <SFML/Graphics.hpp>
 #include <Constants/Constants.hpp>
-#include <GameManager.hpp>
+#include <Engine.hpp>
 
 int main()
 {
-    GameManager simulation;
-    simulation.start();
+    Engine sim_engine;
+    sim_engine.start();
 
     return 0;
 }
