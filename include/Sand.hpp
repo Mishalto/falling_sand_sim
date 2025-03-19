@@ -2,6 +2,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include <Constants/Constants.hpp>
+
 class Sand {
 
 private:
@@ -10,5 +12,5 @@ private:
 public:
     Sand();
 
-    const sf::RectangleShape& get_grain() const;
+    sf::RectangleShape& get_grain();
 };
