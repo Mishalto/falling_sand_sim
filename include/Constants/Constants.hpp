@@ -15,3 +15,7 @@ namespace GrainStats {
 namespace Physics {
     const sf::Vector2f falling_speed = {0, 10};
 }
+
+namespace Memory {
+    const int grains_count = 1000;
+}
