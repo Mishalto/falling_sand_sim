@@ -1,6 +1,8 @@
 #include <Sand.hpp>
 
-Sand::Sand() {}
+Sand::Sand() {
+    sand_pool_.reserve(Memory::grains_count);
+}
 
 void Sand::add_grain() {
     sand_pool_.emplace_back(Grain{});
