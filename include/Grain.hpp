@@ -4,13 +4,13 @@
 
 #include <Constants/Constants.hpp>
 
-class Sand {
+class Grain {
 
 private:
     sf::RectangleShape grain_;
 
 public:
-    Sand();
+    Grain();
 
     sf::RectangleShape& get_grain();
 };

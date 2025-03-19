@@ -7,7 +7,7 @@ namespace Resolution {
     const int height = 1080;
 }
 
-namespace Grain {
+namespace GrainStats {
     const sf::Vector2f size = {100, 100};
     const sf::Color color = sf::Color(194, 178, 128);
 }
