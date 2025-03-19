@@ -1,11 +1,10 @@
 #include <Sand.hpp>
 
 Sand::Sand() {
-    grain_.setSize({10, 10});
-    grain_.setFillColor(sf::Color::Yellow);
-    grain_.setPosition({500, 500});
+    grain_.setSize(Grain::size);
+    grain_.setFillColor(Grain::color);
 }
 
-const sf::RectangleShape& Sand::get_grain() const {
+sf::RectangleShape& Sand::get_grain() {
     return grain_;
 }
