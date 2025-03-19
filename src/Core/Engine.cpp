@@ -13,7 +13,9 @@ void Engine::start() {
 }
 
 void Engine::update() {
-    sand_.get_grain().move({1, 1});
+    for (auto& grain : sand_.get_grains()) {
+        grain.get_grain().move({1, 1});
+    }
 }
 
 void Engine::check_events() {
@@ -24,13 +26,14 @@ void Engine::check_events() {
     }
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) {
-        sf::Vector2f mouse_pos = static_cast<sf::Vector2f>(sf::Mouse::getPosition());
-        sand_.get_grain().setPosition({mouse_pos});
+        sand_.add_grain();
     }
 }
 
 void Engine::draw() {
     window_.clear();
-    window_.draw(sand_.get_grain());
+    for (auto& grain : sand_.get_grains()) {
+        window_.draw(grain.get_grain());
+    }
     window_.display();
 }

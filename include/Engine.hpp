@@ -2,13 +2,13 @@
 
 #include <SFML/Graphics.hpp>
 
-#include <Grain.hpp>
+#include <Sand.hpp>
 #include <Constants/Constants.hpp>
 
 class Engine {
 
 private:
-    Grain sand_;
+    Sand sand_;
 
     sf::RenderWindow window_;
     const int fps_ = 60;
