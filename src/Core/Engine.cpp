@@ -10,7 +10,6 @@ void Engine::start() {
         draw();
     }
 }
-
 void Engine::check_events() {
     while (const std::optional event = window_.pollEvent()) {
         if (event->is<sf::Event::Closed>()) {
