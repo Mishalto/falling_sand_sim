@@ -16,20 +16,18 @@ void Engine::check_events() {
             window_.close();
         }
     }
-
     if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) {
         sand_.add_grain(sf::Mouse::getPosition());
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
+        // todo
     }
 }
 
 void Engine::draw() {
     window_.clear();
     for (auto& s : sand_.get_grains()) {
-        for (auto& grain : s) {
-            if (grain) {
-                window_.draw(grain->get_grain());
-            }
-        }
+        window_.draw(s.get_grain());
     }
     window_.display();
 }
