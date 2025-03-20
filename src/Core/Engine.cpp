@@ -14,7 +14,7 @@ void Engine::start() {
 
 void Engine::update() {
     for (auto& grain : sand_.get_grains()) {
-        grain.get_grain().move(Physics::falling_speed);
+        grain.get_grain();
     }
 }
 
@@ -26,7 +26,18 @@ void Engine::check_events() {
     }
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) {
-        sand_.add_grain();
+        for (size_t i = 0; i < grid_.size(); ++i) {
+            for (size_t j = 0; j < grid_[i].size(); ++j) {
+                sf::Vector2i mouse_pos = sf::Mouse::getPosition();
+                if (mouse_pos.x > j * GrainStats::size && mouse_pos.x < j * GrainStats::size + GrainStats::size &&
+                    mouse_pos.y > i * GrainStats::size && mouse_pos.y < i * GrainStats::size + GrainStats::size) {
+                        float x_pos = static_cast<int>(j) * GrainStats::size;
+                        float y_pos = static_cast<int>(i) * GrainStats::size;
+                        sf::Vector2f pos = {x_pos, y_pos};
+                        sand_.add_grain(pos);
+                    }
+            }
+        }
     }
 }
 
