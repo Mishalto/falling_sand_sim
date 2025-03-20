@@ -10,6 +10,10 @@ namespace Resolution {
     constexpr int fps = 60;
 }
 
+namespace Memory {
+    constexpr int crains_count = 250;
+}
+
 namespace GrainStats {
     constexpr float size = 30;
     constexpr sf::Vector2f size_2f = {size, size};
