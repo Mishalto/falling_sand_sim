@@ -11,7 +11,6 @@ private:
     Sand sand_;
 
     sf::RenderWindow window_;
-    const int fps_ = 60;
 
     void update();
     void draw();

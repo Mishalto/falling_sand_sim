@@ -3,20 +3,21 @@
 #include <SFML/Graphics.hpp>
 
 namespace Resolution {
-    const int width = 1920;
-    const int height = 1080;
+    constexpr int width = 1920;
+    constexpr int height = 1080;
+    constexpr int fps = 60;
 }
 
 namespace GrainStats {
-    const float size = 5;
-    const sf::Vector2f size_2f = {size, size};
-    const sf::Color color = sf::Color(194, 178, 128);
+    constexpr float size = 5;
+    constexpr sf::Vector2f size_2f = {size, size};
+    constexpr sf::Color color = sf::Color(194, 178, 128);
 }
 
 namespace Physics {
-    const sf::Vector2f falling_speed = {0, 10};
+    constexpr sf::Vector2f falling_speed = {0, 10};
 }
 
 namespace Memory {
-    const int grains_count = 1000;
+    constexpr int grains_count = 1000;
 }
