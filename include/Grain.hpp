@@ -10,7 +10,7 @@ private:
     sf::RectangleShape grain_;
 
 public:
-    Grain();
+    Grain(sf::Vector2f mouse_pos);
 
     sf::RectangleShape& get_grain();
 };
