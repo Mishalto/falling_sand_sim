@@ -1,5 +1,3 @@
-#include <SFML/Graphics.hpp>
-
 #include <Engine.hpp>
 
 int main()
