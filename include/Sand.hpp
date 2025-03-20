@@ -15,5 +15,5 @@ public:
     Sand();
 
     std::vector<Grain>& get_grains();
-    void add_grain();
+    void add_grain(sf::Vector2f pos);
 };
