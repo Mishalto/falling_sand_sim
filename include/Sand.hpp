@@ -11,7 +11,6 @@
 class Sand {
 
 private:
-    // std::vector<Grain> sand_pool_;
     std::vector<std::vector<std::optional<Grain>>> sand_pool_;
     std::array<std::array<bool, Grid::x_cells>, Grid::y_cells> grid_;
 
