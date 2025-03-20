@@ -7,14 +7,7 @@ Engine::Engine() : window_(sf::VideoMode({Resolution::width, Resolution::height}
 void Engine::start() {
     while (window_.isOpen()) {
         check_events();
-        update();
         draw();
-    }
-}
-
-void Engine::update() {
-    for (auto& grain : sand_.get_grains()) {
-        grain.get_grain();
     }
 }
 
@@ -32,8 +25,12 @@ void Engine::check_events() {
 
 void Engine::draw() {
     window_.clear();
-    for (auto& grain : sand_.get_grains()) {
-        window_.draw(grain.get_grain());
+    for (auto& s : sand_.get_grains()) {
+        for (auto& grain : s) {
+            if (grain) {
+                window_.draw(grain->get_grain());
+            }
+        }
     }
     window_.display();
 }

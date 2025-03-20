@@ -13,7 +13,6 @@ private:
     Sand sand_;
     sf::RenderWindow window_;
 
-    void update();
     void draw();
     void check_events();
 public:

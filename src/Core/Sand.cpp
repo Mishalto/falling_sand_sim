@@ -1,7 +1,13 @@
 #include <Sand.hpp>
 
 Sand::Sand() {
-    sand_pool_.reserve(Memory::grains_count);
+    sand_pool_ = std::vector<std::vector<std::optional<Grain>>>(Grid::y_cells, std::vector<std::optional<Grain>>(Grid::x_cells, std::nullopt));
+    for (size_t i = 0; i < Grid::y_cells; ++i) {
+        for (size_t j = 0; j < Grid::x_cells; ++j) {
+            sand_pool_[i][j] = std::nullopt;
+            grid_[i][j] = false;
+        }
+    }
 }
 
 void Sand::add_grain(sf::Vector2i mouse_pos) {
@@ -11,14 +17,13 @@ void Sand::add_grain(sf::Vector2i mouse_pos) {
                 mouse_pos.y > i * GrainStats::size && mouse_pos.y < i * GrainStats::size + GrainStats::size) {  // check top and bottom
                     float x_pos = static_cast<int>(j) * GrainStats::size;
                     float y_pos = static_cast<int>(i) * GrainStats::size;
-                    sf::Vector2f pos = {x_pos, y_pos};
-                    sand_pool_.emplace_back(Grain{pos});
+                    sand_pool_[i][j] = Grain{{x_pos, y_pos}};
                 }
         }
     }
 }
 
-std::vector<Grain>& Sand::get_grains() {
+std::vector<std::vector<std::optional<Grain>>>& Sand::get_grains() {
     return sand_pool_;
 }
 
