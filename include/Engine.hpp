@@ -11,7 +11,6 @@ class Engine {
 
 private:
     Sand sand_;
-    std::array<std::array<bool, Grid::x_cells>, Grid::y_cells> grid_;
     sf::RenderWindow window_;
 
     void update();

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <array>
 
 #include <SFML/Graphics.hpp>
 
@@ -10,10 +11,12 @@ class Sand {
 
 private:
     std::vector<Grain> sand_pool_;
+    std::array<std::array<bool, Grid::x_cells>, Grid::y_cells> grid_;
 
 public:
     Sand();
 
-    std::vector<Grain>& get_grains();
     void add_grain(sf::Vector2f pos);
+    std::vector<Grain>& get_grains();
+    std::array<std::array<bool, Grid::x_cells>, Grid::y_cells>& get_grid();
 };
