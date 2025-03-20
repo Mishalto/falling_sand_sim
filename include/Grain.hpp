@@ -13,4 +13,5 @@ public:
     Grain(sf::Vector2f mouse_pos);
 
     sf::RectangleShape& get_grain();
+    void move(sf::Vector2f dir);
 };
