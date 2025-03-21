@@ -37,15 +37,15 @@ void Sand::init_grid() {
 }
 
 void Sand::step() {
-    float step = Physics::step;
+    int step = Physics::step;
     for (auto& g : sand_pool_) {
         sf::Vector2i cd = g.get_coordinate();
         if (cd.y + step < grid_.size()) {
             if (!grid_[cd.y + step][cd.x]) {
                 g.move({0, step});
                 grid_[cd.y][cd.x] = false;
-                grid_[cd.y + 1][cd.x] = true;
-            } else if (cd.x + step < grid_.data()->size() && !grid_[cd.y][cd.x + 1] && !grid_[cd.y + step][cd.x + step]) {
+                grid_[cd.y + step][cd.x] = true;
+            } else if (cd.x + step < grid_[0].size() && !grid_[cd.y][cd.x + step] && !grid_[cd.y + step][cd.x + step]) {
                 g.move({step, 0});
                 grid_[cd.y][cd.x] = false;
                 grid_[cd.y][cd.x + step] = true;
