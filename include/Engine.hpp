@@ -15,6 +15,7 @@ private:
 
     void draw();
     void check_events();
+    void update();
 public:
     Engine();
 

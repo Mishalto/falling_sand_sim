@@ -12,10 +12,13 @@ sf::RectangleShape& Grain::get_grain() {
 
 void Grain::move(sf::Vector2f dir) {
     grain_.move({dir.x * GrainStats::size, dir.y * GrainStats::size});
-    if (dir.y == 1) {
+    if (dir.y == Physics::step) {
         coordinate_.y += dir.y;
     }
-    if (dir.x == 1) {
+    if (dir.x == Physics::step) {
+        coordinate_.x += dir.x;
+    }
+    if (dir.x == -Physics::step) {
         coordinate_.x += dir.x;
     }
 }

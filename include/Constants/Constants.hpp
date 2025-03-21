@@ -7,7 +7,7 @@
 namespace Resolution {
     constexpr int width = 2560;
     constexpr int height = 1440;
-    constexpr int fps = 60;
+    constexpr int fps = 10000;
 }
 
 namespace Memory {
@@ -15,7 +15,7 @@ namespace Memory {
 }
 
 namespace GrainStats {
-    constexpr float size = 20;
+    constexpr float size = 2;
     constexpr sf::Vector2f size_2f = {size, size};
     constexpr sf::Color color = sf::Color(194, 178, 128);
 }
@@ -26,7 +26,5 @@ namespace Grid {
 }
 
 namespace Physics {
-    constexpr float x = 0;
-    constexpr float y = 10;
-    constexpr sf::Vector2f falling_speed = {x, y};
+    constexpr int step = 1;
 }

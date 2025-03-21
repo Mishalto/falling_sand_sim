@@ -37,16 +37,21 @@ void Sand::init_grid() {
 }
 
 void Sand::step() {
-    for (ptrdiff_t i = 0; i < sand_pool_.size(); ++i) {
-        sf::Vector2i coord = sand_pool_[i].get_coordinate();
-        if (coord.y < grid_.size() - 1 && !grid_[coord.y + 1][coord.x]) {
-            sand_pool_[i].move({0, 1});
-            grid_[coord.y][coord.x] = false;
-            grid_[coord.y + 1][coord.x] = true;
-        } else if (coord.x < grid_.size() && !grid_[coord.y][coord.x + 1]) {
-            sand_pool_[i].move({1, 0});
-            grid_[coord.y][coord.x] = false;
-            grid_[coord.y][coord.x + 1] = true;
+    float step = Physics::step;
+    for (auto& g : sand_pool_) {
+        sf::Vector2i cd = g.get_coordinate();
+        if (cd.y + 1 < grid_.size()  && !grid_[cd.y + 1][cd.x]) {
+            g.move({0, step});
+            grid_[cd.y][cd.x] = false;
+            grid_[cd.y + 1][cd.x] = true;
+        } else if (cd.y + 1 < grid_.size() && cd.x + 1 < grid_.data()->size() && cd.x < grid_.data()->size() && !grid_[cd.y][cd.x + 1] && !grid_[cd.y + 1][cd.x + 1]) {
+            g.move({step, 0});
+            grid_[cd.y][cd.x] = false;
+            grid_[cd.y][cd.x + 1] = true;
+        } else if (cd.y + 1 < grid_.size() && cd.x - 1 >= 0 && !grid_[cd.y][cd.x - 1] && !grid_[cd.y + 1][cd.x - 1]) {
+            g.move({-step, 0});
+            grid_[cd.y][cd.x] = false;
+            grid_[cd.y][cd.x - 1] = true;
         }
     }
 }

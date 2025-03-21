@@ -7,6 +7,7 @@ Engine::Engine() : window_(sf::VideoMode({Resolution::width, Resolution::height}
 void Engine::start() {
     while (window_.isOpen()) {
         check_events();
+        update();
         draw();
     }
 }
@@ -30,4 +31,8 @@ void Engine::draw() {
         window_.draw(s.get_grain());
     }
     window_.display();
+}
+
+void Engine::update() {
+    sand_.step();
 }
