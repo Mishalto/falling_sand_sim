@@ -10,7 +10,7 @@ sf::RectangleShape& Grain::get_grain() {
     return grain_;
 }
 
-void Grain::move(sf::Vector2f dir) {
+void Grain::move(sf::Vector2i dir) {
     grain_.move({dir.x * GrainStats::size, dir.y * GrainStats::size});
     if (dir.y == Physics::step) {
         coordinate_.y += dir.y;
