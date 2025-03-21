@@ -40,18 +40,20 @@ void Sand::step() {
     float step = Physics::step;
     for (auto& g : sand_pool_) {
         sf::Vector2i cd = g.get_coordinate();
-        if (cd.y + 1 < grid_.size()  && !grid_[cd.y + 1][cd.x]) {
-            g.move({0, step});
-            grid_[cd.y][cd.x] = false;
-            grid_[cd.y + 1][cd.x] = true;
-        } else if (cd.y + 1 < grid_.size() && cd.x + 1 < grid_.data()->size() && cd.x < grid_.data()->size() && !grid_[cd.y][cd.x + 1] && !grid_[cd.y + 1][cd.x + 1]) {
-            g.move({step, 0});
-            grid_[cd.y][cd.x] = false;
-            grid_[cd.y][cd.x + 1] = true;
-        } else if (cd.y + 1 < grid_.size() && cd.x - 1 >= 0 && !grid_[cd.y][cd.x - 1] && !grid_[cd.y + 1][cd.x - 1]) {
-            g.move({-step, 0});
-            grid_[cd.y][cd.x] = false;
-            grid_[cd.y][cd.x - 1] = true;
+        if (cd.y + step < grid_.size()) {
+            if (!grid_[cd.y + step][cd.x]) {
+                g.move({0, step});
+                grid_[cd.y][cd.x] = false;
+                grid_[cd.y + 1][cd.x] = true;
+            } else if (cd.x + step < grid_.data()->size() && !grid_[cd.y][cd.x + 1] && !grid_[cd.y + step][cd.x + step]) {
+                g.move({step, 0});
+                grid_[cd.y][cd.x] = false;
+                grid_[cd.y][cd.x + step] = true;
+            } else if (cd.x - step >= 0 && !grid_[cd.y][cd.x - step] && !grid_[cd.y + step][cd.x - step]) {
+                g.move({-step, 0});
+                grid_[cd.y][cd.x] = false;
+                grid_[cd.y][cd.x - step] = true;
+            }
         }
     }
 }
