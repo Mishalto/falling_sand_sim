@@ -20,7 +20,7 @@ void Engine::check_events() {
         sand_.add_grain(sf::Mouse::getPosition());
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
-        // todo
+        sand_.step();
     }
 }
 

@@ -20,5 +20,5 @@ public:
     void add_grain(sf::Vector2i mouse_pos);
     std::vector<Grain>& get_grains();
     std::array<std::array<bool, Grid::x_cells>, Grid::y_cells>& get_grid();
-
+    void step();
 };

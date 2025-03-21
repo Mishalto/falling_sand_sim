@@ -1,6 +1,6 @@
 #include <Grain.hpp>
 
-Grain::Grain(sf::Vector2f mouse_pos) {
+Grain::Grain(sf::Vector2f mouse_pos, sf::Vector2i coordinate) : coordinate_(coordinate) {
     grain_.setSize(GrainStats::size_2f);
     grain_.setFillColor(GrainStats::color);
     grain_.setPosition(mouse_pos);
@@ -12,4 +12,14 @@ sf::RectangleShape& Grain::get_grain() {
 
 void Grain::move(sf::Vector2f dir) {
     grain_.move({dir.x * GrainStats::size, dir.y * GrainStats::size});
+    if (dir.y == 1) {
+        coordinate_.y += dir.y;
+    }
+    if (dir.x == 1) {
+        coordinate_.x += dir.x;
+    }
+}
+
+sf::Vector2i& Grain::get_coordinate() {
+    return coordinate_;
 }
