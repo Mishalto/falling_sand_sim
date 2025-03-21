@@ -11,6 +11,11 @@ void Engine::start() {
         draw();
     }
 }
+
+void Engine::update() {
+    sand_.step();
+}
+
 void Engine::check_events() {
     while (const std::optional event = window_.pollEvent()) {
         if (event->is<sf::Event::Closed>()) {
@@ -31,8 +36,4 @@ void Engine::draw() {
         window_.draw(s.get_grain());
     }
     window_.display();
-}
-
-void Engine::update() {
-    sand_.step();
 }
