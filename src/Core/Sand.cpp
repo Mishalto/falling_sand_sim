@@ -5,6 +5,14 @@ Sand::Sand() {
     init_grid();
 }
 
+void Sand::init_grid() {
+    for (size_t y = 0; y < grid_.size(); ++y) {
+        for (size_t x = 0; x < grid_[y].size(); ++x) {
+            grid_[y][x] = false;
+        }
+    }
+}
+
 void Sand::add_grain(sf::Vector2i mouse_pos) {
     for (size_t y = 0; y < grid_.size(); ++y) {
         for (size_t x = 0; x < grid_[y].size(); ++x) {
@@ -16,22 +24,6 @@ void Sand::add_grain(sf::Vector2i mouse_pos) {
                     sand_pool_.emplace_back(Grain{{x_pos, y_pos}, {static_cast<int>(x), static_cast<int>(y)}}); // vector2f(pos) / vector2i(coordinate)
                     grid_[y][x] = true;
                 }
-        }
-    }
-}
-
-std::vector<Grain>& Sand::get_grains() {
-    return sand_pool_;
-}
-
-std::array<std::array<bool, Grid::x_cells>, Grid::y_cells>& Sand::get_grid() {
-    return grid_;
-}
-
-void Sand::init_grid() {
-    for (size_t y = 0; y < grid_.size(); ++y) {
-        for (size_t x = 0; x < grid_[y].size(); ++x) {
-            grid_[y][x] = false;
         }
     }
 }
@@ -56,4 +48,8 @@ void Sand::step() {
             }
         }
     }
+}
+
+std::vector<Grain>& Sand::get_grains() {
+    return sand_pool_;
 }
