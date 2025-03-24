@@ -1,6 +1,9 @@
 Falling Sand Simulator
 This project is a falling sand simulator implemented in C++ using the SFML library for graphical rendering. It employs a 2D grid to manage the behavior of particles like sand, showcasing simple sandbox algorithms with standard C++ libraries.
+
 Engine class manages the simulation in both versions, but all the action happens in the Sand class in the main branch and the Grid class in the dev branch, respectively. The most computationally expensive algorithms are there, and all the main logic as well.
+
+The class structures in the main and dev branches are very different.
 
 Requirements:
 - Visual Studio Code with the CMake Tools extension installed
