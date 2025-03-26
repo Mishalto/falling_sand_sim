@@ -16,7 +16,7 @@ Most parameters, such as screen resolution and grid size, are managed through Co
 ## Build and Run
 
 1. Clone the repository.
-2. Download SFML 3.0.0 (Visual C++ 17) from the link above and extract it to the root folder of the project.
+2. Download SFML 3.0.0 (Visual C++ 17) from the link above and extract into the project folder.
 3. Open the project folder in Visual Studio Code.
 4. The CMake Tools extension will automatically detect the project and configure the build environment.
 5. Press F7 or click the "Build" button in CMake Tools to start the build process. CMake will handle dependencies and compile the project.
