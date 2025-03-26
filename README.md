@@ -11,12 +11,15 @@ Most parameters, such as screen resolution and grid size, are managed through Co
 
 - Visual Studio Code with the CMake Tools extension installed
 - CMake installed for building the project
-- Dependencies (SFML) are automatically fetched via CMake FetchContent
+- SFML 3.0.0 (64-bit) Visual C++ 17 (2022) https://www.sfml-dev.org/download/sfml/3.0.0/
 
 ## Build and Run
 
 1. Clone the repository.
-2. Open the project folder in Visual Studio Code.
-3. The CMake Tools extension will automatically detect the project and configure the build environment.
-4. Press F7 or click the "Build" button in CMake Tools to start the build process. CMake will handle dependencies and compile the project.
-5. Once the build is complete, run the program directly from the terminal or through the VSCode interface.
+2. Download SFML 3.0.0 (Visual C++ 17) from the link above and extract it to the root folder of the project.
+3. Open the project folder in Visual Studio Code.
+4. The CMake Tools extension will automatically detect the project and configure the build environment.
+5. Press F7 or click the "Build" button in CMake Tools to start the build process. CMake will handle dependencies and compile the project.
+7. Once the build is complete, run the program using one of the following methods:
+- From the terminal: ./falling_sand_sim
+- From the build folder: Clang/MinGW: run from build/, MSVC: run from build/Release/ or build/Debug/
