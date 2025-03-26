@@ -15,7 +15,7 @@ namespace Memory {
 }
 
 namespace GrainStats {
-    constexpr float size = 10;
+    constexpr float size = 5;
     constexpr sf::Vector2f size_2f = {size, size};
     constexpr sf::Color color = sf::Color(194, 178, 128);
 }
