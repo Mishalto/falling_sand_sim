@@ -1,34 +1,10 @@
-# Prerequisites
-*.d
-
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
-/build
-/.vscode
+/build/.cmake
+/build/CMakeFiles
+build/CMakeCache.txt
+build/cmake_install.cmake
+build/.ninja_deps
+build/.ninja_log
+build/build.ninja
+build/compile_commands.json
+build/falling_sand_sim.exe
+build/falling_sand_sim.pdb
