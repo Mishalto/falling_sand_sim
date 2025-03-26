@@ -18,10 +18,3 @@ The class structures in the main and dev branches differ significantly.
 3. The CMake Tools extension will automatically detect the project and configure the build environment.
 4. Press F7 or click the "Build" button in CMake Tools to start the build process. CMake will handle dependencies and compile the project.
 5. Once the build is complete, run the program directly from the terminal or through the VSCode interface.
-
-## Error
-Err: build/_deps/freetype-src/CMakeLists.txt:113 ->
-Fix: Set cmake_minimum_required(VERSION 3.28)
-
-Err: May occur in build/_deps/flac-src, ogg-src, vorbis-src ->
-Fix: Same as above
