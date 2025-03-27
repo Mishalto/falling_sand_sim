@@ -5,8 +5,8 @@
 #include <SFML/Graphics.hpp>
 
 namespace Resolution {
-    constexpr int width = 2560;
-    constexpr int height = 1440;
+    constexpr int width = 800;
+    constexpr int height = 600;
     constexpr int fps = 10000;
 }
 
