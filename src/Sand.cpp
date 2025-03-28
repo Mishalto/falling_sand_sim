@@ -19,7 +19,7 @@ void Sand::add_grain(sf::Vector2i mouse_pos) {
 
     // Convert the mouse position to grid coordinates.
     sf::Vector2i grid_pos = {static_cast<int>(mouse_pos.x / GrainStats::size), static_cast<int>(mouse_pos.y / GrainStats::size)};
-    if (grid_[grid_pos.y][grid_pos.x] == GrainState::Free) {
+    if (grid_[grid_pos.y][grid_pos.x] == GrainState::Free && grid_pos.x > 0 && grid_pos.y <= Grid::x_cells) {
         sand_pool_.emplace_back(Grain{grid_pos});
         grid_[grid_pos.y][grid_pos.x] = GrainState::Occupied;
     }
