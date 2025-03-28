@@ -2,7 +2,7 @@
 
 #include <cstdint>
 
-enum class CellState : uint8_t {
+enum class GrainState : uint8_t {
     Free,
     Occupied,
     Idle
