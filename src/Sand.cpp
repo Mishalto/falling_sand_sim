@@ -30,14 +30,14 @@ void Sand::step()
     // move all sand grains that are free to fall downwards
 
     static constexpr int step = Physics::step;
-
+    static int frame_counter = 0;
     // loop over all the sand grains
     for (auto &g : sand_pool_)
     {
         // current location
         sf::Vector2i cd = g.get_coordinate();
 
-        if (cd.y + step >= grid_.size() && grid_[cd.y][cd.x] != GrainState::Idle)
+        if (cd.y + step >= grid_.size() || grid_[cd.y][cd.x] == GrainState::Idle)
         {
             // the grain is resting on the bottom of the grid
             continue;
@@ -65,10 +65,10 @@ void Sand::step()
             grid_[cd.y][cd.x] = GrainState::Free;
             grid_[cd.y][cd.x - step] = GrainState::Occupied;
         }
-        else
-        {
-            // If there is nowhere to step, the state becomes IDLE and the cell is no longer checked
-            grid_[cd.y][cd.x] = GrainState::Idle;
+        else {
+            // currently is not working as expected
+
+            // grid_[cd.y][cd.x] == GrainState::Idle;
         }
     }
 }
