@@ -28,27 +28,56 @@ void Sand::add_grain(sf::Vector2i mouse_pos) {
     }
 }
 
-void Sand::step() {
+
+void Sand::step()
+{
+    // move all sand grains that are free to fall downwards
+
     int step = Physics::step;
-    for (auto& g : sand_pool_) {
+
+    // loop over all the sand grains
+    for (auto &g : sand_pool_)
+    {
+        // current location
         sf::Vector2i cd = g.get_coordinate();
-        if (cd.y + step < grid_.size()) {
-            if (!grid_[cd.y + step][cd.x]) {
-                g.move({0, step});
-                grid_[cd.y][cd.x] = false;
-                grid_[cd.y + step][cd.x] = true;
-            } else if (cd.x + step < grid_[0].size() && !grid_[cd.y][cd.x + step] && !grid_[cd.y + step][cd.x + step]) {
-                g.move({step, 0});
-                grid_[cd.y][cd.x] = false;
-                grid_[cd.y][cd.x + step] = true;
-            } else if (cd.x - step >= 0 && !grid_[cd.y][cd.x - step] && !grid_[cd.y + step][cd.x - step]) {
-                g.move({-step, 0});
-                grid_[cd.y][cd.x] = false;
-                grid_[cd.y][cd.x - step] = true;
-            }
+
+        if (cd.y + step >= grid_.size())
+        {
+            // the grain is resting on the bottom of the grid
+            // TODO mark the grain has resting, so that it does not need to be checked again
+            continue;
+        }
+        if (!grid_[cd.y + step][cd.x])
+        {
+            // cell below is empty so grain can fall straight down
+            g.move({0, step});
+            grid_[cd.y][cd.x] = false;
+            grid_[cd.y + step][cd.x] = true;
+        }
+        else if (cd.x + step < grid_[0].size() && !grid_[cd.y][cd.x + step] && !grid_[cd.y + step][cd.x + step])
+        {
+            // cells on right and down right are available
+            // move right
+            g.move({step, 0});
+            grid_[cd.y][cd.x] = false;
+            grid_[cd.y][cd.x + step] = true;
+        }
+        else if (cd.x - step >= 0 && !grid_[cd.y][cd.x - step] && !grid_[cd.y + step][cd.x - step])
+        {
+            // cells on left and down left are available
+            // move left
+            g.move({-step, 0});
+            grid_[cd.y][cd.x] = false;
+            grid_[cd.y][cd.x - step] = true;
+        }
+        else
+        {
+            // nowhere for the grain to go
+            // TODO mark grain as stopped
         }
     }
 }
+
 
 std::vector<Grain>& Sand::get_grains() {
     return sand_pool_;
