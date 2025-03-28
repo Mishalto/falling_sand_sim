@@ -29,9 +29,6 @@ void Engine::check_events() {
             sand_.add_grain(sf::Mouse::getPosition(window_));
         }
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
-        sand_.step();
-    }
 }
 
 void Engine::draw() {
