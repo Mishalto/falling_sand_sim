@@ -14,7 +14,7 @@ void Sand::init_grid() {
 }
 
 void Sand::add_grain(sf::Vector2i mouse_pos) {
-    // Converts the mouse position to cell format.
+    // Convert the mouse position to grid coordinates.
     sf::Vector2i grid_pos = {static_cast<int>(mouse_pos.x / GrainStats::size), static_cast<int>(mouse_pos.y / GrainStats::size)};
     if (grid_[grid_pos.y][grid_pos.x] == GrainState::Free) {
         sand_pool_.emplace_back(Grain{grid_pos});
