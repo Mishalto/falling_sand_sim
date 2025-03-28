@@ -1,6 +1,7 @@
 #include <Sand.hpp>
 
 Sand::Sand() {
+    // Reserve memory for grains using a constexpr value from Constants.hpp
     sand_pool_.reserve(Memory::crains_count);
     init_grid();
 }
@@ -75,5 +76,7 @@ void Sand::step()
 
 
 std::vector<Grain>& Sand::get_grains() {
+    // This is necessary for the Engine class to draw grains
+
     return sand_pool_;
 }
