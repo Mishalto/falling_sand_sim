@@ -2,7 +2,7 @@
 
 Sand::Sand() {
     // Reserve memory for grains using a constexpr value from Constants.hpp
-    sand_pool_.reserve(Memory::crains_count);
+    sand_pool_.reserve(Memory::grains_count);
     init_grid();
 }
 
