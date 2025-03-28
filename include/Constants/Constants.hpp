@@ -11,7 +11,7 @@ namespace Resolution {
 }
 
 namespace Memory {
-    constexpr int crains_count = 250;
+    constexpr int grains_count = 250;
 }
 
 namespace GrainStats {
