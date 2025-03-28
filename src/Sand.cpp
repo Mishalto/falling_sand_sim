@@ -6,14 +6,16 @@ Sand::Sand() {
 }
 
 void Sand::init_grid() {
+    // init grid_ by setting all cell to Free
+
     for (size_t y = 0; y < grid_.size(); ++y) {
-        for (size_t x = 0; x < grid_[y].size(); ++x) {
-            grid_[y][x] = GrainState::Free;
-        }
+        std::fill(grid_[y].begin(), grid_[y].end(), GrainState::Free);
     }
 }
 
 void Sand::add_grain(sf::Vector2i mouse_pos) {
+    // Grain is created using the mouse pos
+
     // Convert the mouse position to grid coordinates.
     sf::Vector2i grid_pos = {static_cast<int>(mouse_pos.x / GrainStats::size), static_cast<int>(mouse_pos.y / GrainStats::size)};
     if (grid_[grid_pos.y][grid_pos.x] == GrainState::Free) {
