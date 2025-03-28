@@ -41,7 +41,7 @@ void Sand::step()
         // current location
         sf::Vector2i cd = g.get_coordinate();
 
-        if (cd.y + step >= grid_.size())
+        if (cd.y + step >= grid_.size() && grid_[cd.y][cd.x] != GrainState::Idle)
         {
             // the grain is resting on the bottom of the grid
             // TODO mark the grain has resting, so that it does not need to be checked again
@@ -72,8 +72,8 @@ void Sand::step()
         }
         else
         {
-            // nowhere for the grain to go
-            // TODO mark grain as stopped
+            // If there is nowhere to step, the state becomes IDLE and the cell is no longer checked
+            grid_[cd.y][cd.x] = GrainState::Idle;
         }
     }
 }
