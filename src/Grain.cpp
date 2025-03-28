@@ -1,9 +1,11 @@
 #include <Grain.hpp>
 
-Grain::Grain(sf::Vector2f mouse_pos, sf::Vector2i coordinate) : coordinate_(coordinate) {
+Grain::Grain(sf::Vector2i coordinate) : coordinate_(coordinate) {
     grain_.setSize(GrainStats::size_2f);
     grain_.setFillColor(GrainStats::color);
-    grain_.setPosition(mouse_pos);
+    float x = coordinate.x * GrainStats::size;
+    float y = coordinate.y * GrainStats::size;
+    grain_.setPosition({x, y});
 }
 
 sf::RectangleShape& Grain::get_grain() {

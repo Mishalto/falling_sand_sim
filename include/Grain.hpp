@@ -13,7 +13,7 @@ private:
     sf::Vector2i coordinate_;
 
 public:
-    Grain(sf::Vector2f mouse_pos, sf::Vector2i coordinate);
+    Grain(sf::Vector2i coordinate);
 
     sf::RectangleShape& get_grain();
     void move(sf::Vector2i dir);
