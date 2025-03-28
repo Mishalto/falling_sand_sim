@@ -25,12 +25,11 @@ void Sand::add_grain(sf::Vector2i mouse_pos) {
     }
 }
 
-
 void Sand::step()
 {
     // move all sand grains that are free to fall downwards
 
-    int step = Physics::step;
+    static constexpr int step = Physics::step;
 
     // loop over all the sand grains
     for (auto &g : sand_pool_)
@@ -73,7 +72,6 @@ void Sand::step()
         }
     }
 }
-
 
 std::vector<Grain>& Sand::get_grains() {
     // This is necessary for the Engine class to draw grains

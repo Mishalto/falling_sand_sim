@@ -10,12 +10,6 @@ Grain::Grain(sf::Vector2i coordinate) : coordinate_(coordinate) {
     grain_.setPosition({x, y});
 }
 
-sf::RectangleShape& Grain::get_grain() {
-    // Method are needed in the Engine class to draw
-
-    return grain_;
-}
-
 void Grain::move(sf::Vector2i dir) {
     // This method move the Grain using the given dir * GrainSize
     grain_.move({dir.x * GrainStats::size, dir.y * GrainStats::size});
@@ -33,6 +27,11 @@ void Grain::move(sf::Vector2i dir) {
     }
 }
 
+sf::RectangleShape& Grain::get_grain() {
+    // Method are needed in the Engine class to draw
+
+    return grain_;
+}
 sf::Vector2i& Grain::get_coordinate() {
     // Need Sand::step for logic check and position up
 
