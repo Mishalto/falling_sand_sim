@@ -18,5 +18,7 @@ Most parameters, such as screen resolution and grid size, are managed through Co
 3. The CMake Tools extension will automatically detect the project and configure the build environment.
 4. Press F7 or click the "Build" button in CMake Tools to start the build process. CMake will handle dependencies and compile the project.
 5. Once the build is complete, run the program using one of the following methods:
-      - From the terminal: ./falling_sand_sim.exe
-      - From the build folder
+      - From the terminal:
+              - If using Clang, navigate to the build folder and run: ./falling_sand_sim.exe
+              - If using MSVC, navigate to build/release or build/debug and run: falling_sand_sim.exe
+      - From the build folder, simply locate and run falling_sand_sim.exe in the appropriate directory (build, build/release, or build/debug).
