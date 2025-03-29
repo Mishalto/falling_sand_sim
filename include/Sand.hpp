@@ -12,7 +12,7 @@ class Sand {
 
 private:
     std::vector<Grain> sand_pool_;
-    std::array<std::array<GrainState, Grid::x_cells>, Grid::y_cells> grid_;
+    std::array<std::array<CellState, Grid::x_cells>, Grid::y_cells> grid_;
 
     void init_grid();
 public:
