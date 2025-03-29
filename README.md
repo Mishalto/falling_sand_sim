@@ -17,6 +17,7 @@ Most parameters, such as screen resolution and grid size, are managed through Co
 2. Open the project folder in Visual Studio Code.
 3. The CMake Tools extension will automatically detect the project and configure the build environment.
 4. Press F7 or click the "Build" button in CMake Tools to start the build process. CMake will handle dependencies and compile the project.
-5. After a successful build, all your executable files will be placed in the /bin directory. You can run the program using one of the following methods:
-        - ./falling_sand_sim.exe
-        - or manually navigate to the bin folder inside your project directory and run falling_sand_sim.exe.
+5. After a successful build, all your executable files will be placed in the /bin directory.
+   You can run the program using one of the following methods:
+   - ./falling_sand_sim.exe
+   - or manually navigate to the bin folder inside your project directory and run falling_sand_sim.exe.
