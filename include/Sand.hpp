@@ -18,7 +18,7 @@ private:
 public:
     Sand();
 
-    void step();
+    void update();
     void add_grain(sf::Vector2i mouse_pos);
     std::vector<Grain>& get_grains();
 };

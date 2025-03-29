@@ -13,19 +13,7 @@ void Sand::init_grid() {
     }
 }
 
-void Sand::add_grain(sf::Vector2i mouse_pos) {
-    // Grain is created using the mouse pos
-
-    // Convert the mouse position to grid coordinates.
-    sf::Vector2i grid_pos = {static_cast<int>(mouse_pos.x / GrainStats::size), static_cast<int>(mouse_pos.y / GrainStats::size)};
-    if (grid_[grid_pos.y][grid_pos.x] == CellState::Free) {
-        sand_pool_.emplace_back(Grain{grid_pos});
-        grid_[grid_pos.y][grid_pos.x] = CellState::Occupied;
-    }
-}
-
-void Sand::step()
-{
+void Sand::update() {
     // move all sand grains that are free to fall downwards
 
     static constexpr int step = Physics::step;
@@ -75,6 +63,17 @@ void Sand::step()
             // increase the number of steps to avoid unnecessary transitions to IDLE
             g.increase_steps_to_idle();
         }
+    }
+}
+
+void Sand::add_grain(sf::Vector2i mouse_pos) {
+    // Grain is created using the mouse pos
+
+    // Convert the mouse position to grid coordinates.
+    sf::Vector2i grid_pos = {static_cast<int>(mouse_pos.x / GrainStats::size), static_cast<int>(mouse_pos.y / GrainStats::size)};
+    if (grid_[grid_pos.y][grid_pos.x] == CellState::Free) {
+        sand_pool_.emplace_back(Grain{grid_pos});
+        grid_[grid_pos.y][grid_pos.x] = CellState::Occupied;
     }
 }
 

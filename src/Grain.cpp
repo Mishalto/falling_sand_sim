@@ -43,7 +43,6 @@ void Grain::reset_steps_to_idle() {
     steps_to_idle_ = 0;
 }
 
-
 int Grain::get_steps_to_idle() {
     return steps_to_idle_;
 }
@@ -52,6 +51,6 @@ sf::RectangleShape& Grain::get_grain() {
     return grain_;
 }
 sf::Vector2i& Grain::get_coordinate() {
-    // Need Sand::step for logic check and position up
+    // Need Sand::update for logic check and position up
     return coordinate_;
 }

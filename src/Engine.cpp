@@ -13,7 +13,7 @@ void Engine::start() {
 }
 
 void Engine::update() {
-    sand_.step();
+    sand_.update();
 }
 
 void Engine::check_events() {
@@ -22,6 +22,10 @@ void Engine::check_events() {
             window_.close();
         }
     }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape)) {
+        window_.close();
+    }
+
     if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) {
         if(sf::Mouse::getPosition(window_).y < Resolution::height && sf::Mouse::getPosition(window_).y >= 0
         && sf::Mouse::getPosition(window_).x < Resolution::width && sf::Mouse::getPosition(window_).x >= 0)
