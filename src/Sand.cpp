@@ -30,7 +30,7 @@ void Sand::step()
     // move all sand grains that are free to fall downwards
 
     static constexpr int step = Physics::step;
-    static int stepts_to_idle = 0;
+
     // loop over all the sand grains
     for (auto &g : sand_pool_)
     {
@@ -65,10 +65,17 @@ void Sand::step()
             grid_[cd.y][cd.x] = CellState::Free;
             grid_[cd.y][cd.x - step] = CellState::Occupied;
         }
-        else {
-            // currently is not working as expected
+        else if (g.get_steps_to_idle() == GrainStats::idle_threshold)
+        {
+            // When the number of steps reaches the constant specified in Constants.hpp/GrainStats/idle_threshold
+            // the cell transitions to the IDLE state and is no longer checked
 
-            // grid_[cd.y][cd.x] == GrainState::Idle;
+            grid_[cd.y][cd.x] = CellState::Idle;
+        }
+        else
+        {
+            // increase the number of steps to avoid unnecessary transitions to IDLE
+            g.increase_steps_to_idle();
         }
     }
 }
