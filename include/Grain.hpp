@@ -10,9 +10,10 @@ class Grain {
 
 private:
     sf::RectangleShape grain_;
-    sf::Vector2i coordinate_;
+    sf::Vector2i coordinate_;       // location of grain
 
-    uint8_t steps_to_idle_;
+    bool fAtRest;                   // true if grain has stopped moving
+    
 public:
     Grain(sf::Vector2i coordinate);
 
@@ -20,7 +21,9 @@ public:
     void increase_steps_to_idle();
     void reset_steps_to_idle();
 
-    int get_steps_to_idle();
     sf::RectangleShape& get_grain();
     sf::Vector2i& get_coordinate();
+
+    void setAtRest();
+    bool isAtRest() const;
 };

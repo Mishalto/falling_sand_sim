@@ -21,12 +21,17 @@ void Sand::update() {
     // loop over all the sand grains
     for (auto &g : sand_pool_)
     {
+        // check if grain has stopped moving
+        if( g.isAtRest() )
+            continue;
+
         // current location
         sf::Vector2i cd = g.get_coordinate();
 
-        if (cd.y + step >= grid_.size() || grid_[cd.y][cd.x] == CellState::Idle)
+        if (cd.y + step >= grid_.size() )
         {
             // the grain is resting on the bottom of the grid
+            g.setAtRest();
             continue;
         }
         if (grid_[cd.y + step][cd.x] == CellState::Free)
@@ -52,16 +57,10 @@ void Sand::update() {
             grid_[cd.y][cd.x] = CellState::Free;
             grid_[cd.y][cd.x - step] = CellState::Occupied;
         }
-        else if (g.get_steps_to_idle() == GrainStats::idle_threshold)
-        {
-            // When the number of steps reaches the constant specified in Constants.hpp/GrainStats/idle_threshold
-            // the cell transitions to the IDLE state and is no longer checked
-            grid_[cd.y][cd.x] = CellState::Idle;
-        }
         else
         {
-            // increase the number of steps to avoid unnecessary transitions to IDLE
-            g.increase_steps_to_idle();
+            // nowhere for the grain to go
+            g.setAtRest();
         }
     }
 }
