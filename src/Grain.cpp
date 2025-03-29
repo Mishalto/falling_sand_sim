@@ -16,36 +16,30 @@ void Grain::move(sf::Vector2i dir) {
     if (dir.y == Physics::step) {
         // Down
         coordinate_.y += dir.y;
-
         // If the grain hasn't been idle for 10 steps yet, reset its idle steps counter
-        if (steps_to_idle_ < 10)
         reset_steps_to_idle();
     }
     else if (dir.x == Physics::step) {
         // Right
         coordinate_.x += dir.x;
-
-        if (steps_to_idle_ < 10)
         reset_steps_to_idle();
     }
     else if (dir.x == -Physics::step) {
         // Left
         coordinate_.x += dir.x;
-
-        if (steps_to_idle_ < 10)
         reset_steps_to_idle();
     }
 }
 
 void Grain::increase_steps_to_idle() {
     // Increases the number of steps to idle, but no more than 10.
-    if (steps_to_idle_ <= 10) {
+    if (steps_to_idle_ < 10) {
         ++steps_to_idle_;
     }
 }
-
 void Grain::reset_steps_to_idle() {
     // Reset the steps to idle counter to 0 when the grain moves.
+    if (steps_to_idle_ < 10)
     steps_to_idle_ = 0;
 }
 

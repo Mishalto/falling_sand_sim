@@ -8,7 +8,6 @@ Sand::Sand() {
 
 void Sand::init_grid() {
     // init grid_ by setting all cell to Free
-
     for (size_t y = 0; y < grid_.size(); ++y) {
         std::fill(grid_[y].begin(), grid_[y].end(), CellState::Free);
     }
@@ -69,7 +68,6 @@ void Sand::step()
         {
             // When the number of steps reaches the constant specified in Constants.hpp/GrainStats/idle_threshold
             // the cell transitions to the IDLE state and is no longer checked
-
             grid_[cd.y][cd.x] = CellState::Idle;
         }
         else
@@ -82,6 +80,5 @@ void Sand::step()
 
 std::vector<Grain>& Sand::get_grains() {
     // This is necessary for the Engine class to draw grains
-
     return sand_pool_;
 }
