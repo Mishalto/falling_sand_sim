@@ -6,7 +6,7 @@
     "configurations": [
         {
             "name": "(gdb) Launch",
-            "type": "cppdbg",
+            "type": "cppvsdbg",             // use the microsoft debugger
             "request": "launch",
             "program": "${workspaceFolder}/build/Debug/falling_sand_sim.exe",
             //  "args": ["127.0.0.1","27654"],
