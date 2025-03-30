@@ -20,7 +20,7 @@ Most parameters, such as screen resolution and grid size, are managed through Co
 5. After a successful build, all your executable files will be placed in the /bin directory.
    You can run the program using one of the following methods:
    Clang:
-   1. ./falling_sand_sim.exe
+      1. ./falling_sand_sim.exe
    MSVC:
-   1. Navigate to the appropriate build directory (cd Debug or cd Release, depending on your build configuration).
-   2. ./falling_sand_sim.exe
+      1. Navigate to the appropriate build directory (cd Debug or cd Release, depending on your build configuration).
+      2. ./falling_sand_sim.exe
