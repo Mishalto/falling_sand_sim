@@ -107,13 +107,21 @@ void Sand::draw(sf::RenderWindow &window)
 void Sand::freeGrainsAbove(const sf::Vector2i &location)
 {
     // free grains that may have been blocked;
+    if (location.y - 1 < 0)
+        return;
     auto n = grid_[location.y - 1][location.x];
     if (n != NULL)
         n->setAtRest(false);
-    n = grid_[location.y - 1][location.x - 1];
-    if (n != NULL)
-        n->setAtRest(false);
-    n = grid_[location.y - 1][location.x + 1];
-    if (n != NULL)
-        n->setAtRest(false);
+    if (location.x - 1 >= 0)
+    {
+        n = grid_[location.y - 1][location.x - 1];
+        if (n != NULL)
+            n->setAtRest(false);
+    }
+    if (location.x + 1 < grid_.size())
+    {
+        n = grid_[location.y - 1][location.x + 1];
+        if (n != NULL)
+            n->setAtRest(false);
+    }
 }
