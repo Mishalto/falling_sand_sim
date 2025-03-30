@@ -19,8 +19,10 @@ Most parameters, such as screen resolution and grid size, are managed through Co
 4. Press F7 or click the "Build" button in CMake Tools to start the build process. CMake will handle dependencies and compile the project.
 5. After a successful build, all your executable files will be placed in the /bin directory.
    You can run the program using one of the following methods:
+   
    Clang:
-      1. ./falling_sand_sim.exe
+      - ./falling_sand_sim.exe
+        
    MSVC:
-      1. Navigate to the appropriate build directory (cd Debug or cd Release, depending on your build configuration).
-      2. ./falling_sand_sim.exe
+      - Navigate to the appropriate build directory (cd Debug or cd Release, depending on your build configuration).
+      - ./falling_sand_sim.exe
