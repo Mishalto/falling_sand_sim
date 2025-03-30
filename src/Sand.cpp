@@ -1,83 +1,119 @@
 #include <Sand.hpp>
 
-Sand::Sand() {
-    // Reserve memory for grains using a constexpr value from Constants.hpp
-    sand_pool_.reserve(Memory::grains_count);
-    init_grid();
+Sand::Sand()
+    : grid_(Grid::y_cells, std::vector<grain_t>(Grid::x_cells))
+{
 }
 
-void Sand::init_grid() {
-    // init grid_ by setting all cell to Free
-    for (size_t y = 0; y < grid_.size(); ++y) {
-        std::fill(grid_[y].begin(), grid_[y].end(), CellState::Free);
-    }
-}
-
-void Sand::update() {
+void Sand::update()
+{
     // move all sand grains that are free to fall downwards
 
     static constexpr int step = Physics::step;
 
-    // loop over all the sand grains
-    for (auto &g : sand_pool_)
+    // loop over all the rows of sand grains
+    // we start at the bottom because a grain moving my liberate grains higher up
+    for (int krow = grid_.size() - 1; krow >= 0; krow--)
     {
-        // current location
-        sf::Vector2i cd = g.get_coordinate();
+        // loop over the grains in the row
+        for (grain_t grain : grid_[krow])
+        {
+            // check that location holds a grain
+            if (grain == NULL)
+                continue;
 
-        if (cd.y + step >= grid_.size() || grid_[cd.y][cd.x] == CellState::Idle)
-        {
-            // the grain is resting on the bottom of the grid
-            continue;
-        }
-        if (grid_[cd.y + step][cd.x] == CellState::Free)
-        {
-            // cell below is empty so grain can fall straight down
-            g.move({0, step});
-            grid_[cd.y][cd.x] = CellState::Free;
-            grid_[cd.y + step][cd.x] = CellState::Occupied;
-        }
-        else if (cd.x + step < grid_[0].size() && grid_[cd.y][cd.x + step] == CellState::Free && grid_[cd.y + step][cd.x + step] == CellState::Free)
-        {
-            // cells on right and down right are available
-            // move right
-            g.move({step, 0});
-            grid_[cd.y][cd.x] = CellState::Free;
-            grid_[cd.y][cd.x + step] = CellState::Occupied;
-        }
-        else if (cd.x - step >= 0 && grid_[cd.y][cd.x - step] == CellState::Free && grid_[cd.y + step][cd.x - step] == CellState::Free)
-        {
-            // cells on left and down left are available
-            // move left
-            g.move({-step, 0});
-            grid_[cd.y][cd.x] = CellState::Free;
-            grid_[cd.y][cd.x - step] = CellState::Occupied;
-        }
-        else if (g.get_steps_to_idle() == GrainStats::idle_threshold)
-        {
-            // When the number of steps reaches the constant specified in Constants.hpp/GrainStats/idle_threshold
-            // the cell transitions to the IDLE state and is no longer checked
-            grid_[cd.y][cd.x] = CellState::Idle;
-        }
-        else
-        {
-            // increase the number of steps to avoid unnecessary transitions to IDLE
-            g.increase_steps_to_idle();
+            // check that grain is not blocked
+            if (grain->isAtRest())
+                continue;
+
+            // current location
+            sf::Vector2i cd = grain->get_coordinate();
+
+            if (cd.y + step >= grid_.size())
+            {
+                // the grain is resting on the bottom of the grid
+                grain->setAtRest();
+                continue;
+            }
+
+            // try moving grain down
+            bool fMoved = false;
+            if (grid_[cd.y + step][cd.x] == NULL)
+            {
+                // cell below is empty so grain can fall straight down
+                grain->move({0, step});
+                grid_[cd.y + step][cd.x] = grain;
+                grid_[cd.y][cd.x] = NULL;
+                fMoved = true;
+            }
+            else if (cd.x + step < grid_[0].size() && grid_[cd.y][cd.x + step] == NULL && grid_[cd.y + step][cd.x + step] == NULL)
+            {
+                // cells on right and down right are available
+                // move right
+                grain->move({step, 0});
+                grid_[cd.y][cd.x + step] = grain;
+                grid_[cd.y][cd.x] = NULL;
+                fMoved = true;
+            }
+            else if (cd.x - step >= 0 && grid_[cd.y][cd.x - step] == NULL && grid_[cd.y + step][cd.x - step] == NULL)
+            {
+                // cells on left and down left are available
+                // move left
+                grain->move({-step, 0});
+                grid_[cd.y][cd.x - step] = grain;
+                grid_[cd.y][cd.x] = NULL;
+                fMoved = true;
+            }
+
+            if (fMoved)
+            {
+                // free grains that may have been blocked;
+                freeGrainsAbove(cd);
+            }
+            else
+            {
+                // grain is blocked
+                grain->setAtRest();
+            }
         }
     }
 }
 
-void Sand::add_grain(sf::Vector2i mouse_pos) {
+void Sand::add_grain(sf::Vector2i mouse_pos)
+{
     // Grain is created using the mouse pos
 
     // Convert the mouse position to grid coordinates.
-    sf::Vector2i grid_pos = {static_cast<int>(mouse_pos.x / GrainStats::size), static_cast<int>(mouse_pos.y / GrainStats::size)};
-    if (grid_[grid_pos.y][grid_pos.x] == CellState::Free) {
-        sand_pool_.emplace_back(Grain{grid_pos});
-        grid_[grid_pos.y][grid_pos.x] = CellState::Occupied;
-    }
+    sf::Vector2i grid_pos = {
+        static_cast<int>(mouse_pos.x / GrainStats::size),
+        static_cast<int>(mouse_pos.y / GrainStats::size)};
+
+    // check that there is no grain already at this position
+    if (grid_[grid_pos.y][grid_pos.x] != NULL)
+        return;
+
+    // construct the grain
+    grid_[grid_pos.y][grid_pos.x] = grain_t(new Grain(grid_pos));
 }
 
-std::vector<Grain>& Sand::get_grains() {
-    // This is necessary for the Engine class to draw grains
-    return sand_pool_;
+void Sand::draw(sf::RenderWindow &window)
+{
+    for (auto &row : grid_)
+        for (auto grain : row)
+            if (grain != NULL)
+                window.draw(grain->get_grain());
+}
+
+void Sand::freeGrainsAbove(const sf::Vector2i &location)
+{
+    // free grains that may have been blocked;
+    auto n = grid_[location.y - 1][location.x];
+    if (n != NULL)
+        n->setAtRest(false);
+    n = grid_[location.y - 1][location.x - 1];
+    if (n != NULL)
+        n->setAtRest(false);
+    n = grid_[location.y - 1][location.x + 1];
+    if (n != NULL)
+        n->setAtRest(false);
 }
