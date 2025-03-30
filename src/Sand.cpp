@@ -35,25 +35,24 @@ void Sand::update()
                 // cell below is empty so grain can fall straight down
                 grain->move({0, step});
                 grid_[cd.y + step][cd.x] = grain;
-                grid_[cd.y][cd.x].reset();
+                grid_[cd.y][cd.x] = NULL;
             }
-            // TODO re-implement diagonal moves
-            // else if (cd.x + step < grid_[0].size() && grid_[cd.y][cd.x + step] == NULL && grid_[cd.y + step][cd.x + step] == CellState::Free)
-            // {
-            //     // cells on right and down right are available
-            //     // move right
-            //     g.move({step, 0});
-            //     grid_[cd.y][cd.x] = CellState::Free;
-            //     grid_[cd.y][cd.x + step] = CellState::Occupied;
-            // }
-            // else if (cd.x - step >= 0 && grid_[cd.y][cd.x - step] == CellState::Free && grid_[cd.y + step][cd.x - step] == CellState::Free)
-            // {
-            //     // cells on left and down left are available
-            //     // move left
-            //     g.move({-step, 0});
-            //     grid_[cd.y][cd.x] = CellState::Free;
-            //     grid_[cd.y][cd.x - step] = CellState::Occupied;
-            // }
+            else if (cd.x + step < grid_[0].size() && grid_[cd.y][cd.x + step] == NULL && grid_[cd.y + step][cd.x + step] == NULL)
+            {
+                // cells on right and down right are available
+                // move right
+                grain->move({step, 0});
+                grid_[cd.y][cd.x + step] = grain;
+                grid_[cd.y][cd.x] = NULL;
+            }
+            else if (cd.x - step >= 0 && grid_[cd.y][cd.x - step] == NULL && grid_[cd.y + step][cd.x - step] == NULL)
+            {
+                // cells on left and down left are available
+                // move left
+                grain->move({-step, 0});
+                grid_[cd.y][cd.x - step] = grain;
+                grid_[cd.y][cd.x] = NULL;
+            }
             else
             {
                 // grain is blocked
