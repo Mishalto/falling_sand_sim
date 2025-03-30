@@ -3,11 +3,7 @@
 Sand::Sand()
     : grid_(Grid::y_cells, std::vector<grain_t>(Grid::x_cells))
 {
-    // // Reserve memory for grains using a constexpr value from Constants.hpp
-    // sand_pool_.reserve(Memory::grains_count);
-    // init_grid();
 }
-
 
 void Sand::update()
 {
@@ -20,8 +16,11 @@ void Sand::update()
     for (int krow = grid_.size() - 1; krow >= 0; krow--)
     {
         // loop over the grains in the row
-        for (auto grain : grid_[krow])
+        for (grain_t grain : grid_[krow])
         {
+            // check that location hold a grain
+            if (grain == NULL)
+                continue;
 
             // current location
             sf::Vector2i cd = grain->get_coordinate();
@@ -63,20 +62,27 @@ void Sand::update()
     }
 }
 
-    void Sand::add_grain(sf::Vector2i mouse_pos)
-    {
-        // Grain is created using the mouse pos
+void Sand::add_grain(sf::Vector2i mouse_pos)
+{
+    // Grain is created using the mouse pos
 
-        // Convert the mouse position to grid coordinates.
-        sf::Vector2i grid_pos = {
-            static_cast<int>(mouse_pos.x / GrainStats::size),
-            static_cast<int>(mouse_pos.y / GrainStats::size)};
+    // Convert the mouse position to grid coordinates.
+    sf::Vector2i grid_pos = {
+        static_cast<int>(mouse_pos.x / GrainStats::size),
+        static_cast<int>(mouse_pos.y / GrainStats::size)};
 
-        // check that there is no grain already at this position
-        if( grid_[grid_pos.y][grid_pos.x] != NULL )
-            return;
-        
-        // construct the grain
-        grid_[grid_pos.y][grid_pos.x] = grain_t( new Grain( grid_pos) );
-        
-    }
+    // check that there is no grain already at this position
+    if (grid_[grid_pos.y][grid_pos.x] != NULL)
+        return;
+
+    // construct the grain
+    grid_[grid_pos.y][grid_pos.x] = grain_t(new Grain(grid_pos));
+}
+
+void Sand::draw(sf::RenderWindow &window)
+{
+    for (auto &row : grid_)
+        for (auto grain : row)
+            if (grain != NULL)
+                window.draw(grain->get_grain());
+}

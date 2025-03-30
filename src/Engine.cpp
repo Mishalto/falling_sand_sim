@@ -37,8 +37,6 @@ void Engine::check_events() {
 
 void Engine::draw() {
     window_.clear();
-    for (auto& s : sand_.get_grains()) {
-        window_.draw(s.get_grain());
-    }
+    sand_.draw( window_);
     window_.display();
 }

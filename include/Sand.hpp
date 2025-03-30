@@ -21,6 +21,7 @@ public:
 
     void update();
     void add_grain(sf::Vector2i mouse_pos);
+    void draw( sf::RenderWindow& window);
 
     grid_t &getGrid()
     {
