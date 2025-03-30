@@ -12,15 +12,18 @@ class Sand
 
 private:
     typedef std::shared_ptr<Grain> grain_t;
+    typedef std::vector<std::vector<grain_t>> grid_t;
 
-    std::vector<std::vector<grain_t>> grid_;
-
-    void init_grid();
+    grid_t grid_;
 
 public:
     Sand();
 
     void update();
     void add_grain(sf::Vector2i mouse_pos);
-    std::vector<Grain> &get_grains();
+
+    grid_t &getGrid()
+    {
+        return grid_;
+    }
 };
