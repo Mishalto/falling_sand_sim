@@ -16,6 +16,8 @@ private:
 
     grid_t grid_;
 
+    void freeGrainsAbove( const sf::Vector2i& location );
+    
 public:
     Sand();
 
