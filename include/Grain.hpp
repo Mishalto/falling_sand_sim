@@ -20,7 +20,7 @@ private:
     */
     sf::Vector2i coordinate_;
 
-    bool fAtRest;                 // true if grain has stopped moving
+    bool is_at_rest_;                 // true if grain has stopped moving
 
 public:
     Grain(sf::Vector2i coordinate);
@@ -31,7 +31,7 @@ public:
     sf::RectangleShape& get_grain();
     sf::Vector2i& get_coordinate();
 
-    void setAtRest(bool f = true);
-    bool isAtRest() const;
+    void set_at_rest(bool f = true);
+    bool is_at_rest() const;
 
 };

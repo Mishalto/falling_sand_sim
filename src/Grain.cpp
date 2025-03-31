@@ -1,7 +1,7 @@
 #include <Grain.hpp>
 
-Grain::Grain(sf::Vector2i coordinate) 
-: coordinate_(coordinate), fAtRest( false ) {
+Grain::Grain(sf::Vector2i coordinate)
+: coordinate_(coordinate), is_at_rest_( false ) {
     // Grain param are set using from Constants.hpp and its grid pos is calc from coordinate_
 
     grain_.setSize(GrainStats::size_2f);
@@ -37,9 +37,9 @@ sf::Vector2i& Grain::get_coordinate() {
     return coordinate_;
 }
 
-void Grain::setAtRest( bool f) {
-    fAtRest = f;
+void Grain::set_at_rest( bool f) {
+    is_at_rest_ = f;
 }
-bool Grain::isAtRest() const {
-    return fAtRest;
+bool Grain::is_at_rest() const {
+    return is_at_rest_;
 }
