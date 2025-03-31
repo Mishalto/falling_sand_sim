@@ -21,7 +21,7 @@ void Sand::update() {
                 continue;
 
             // check that grain is not blocked
-            if (grain->isAtRest())
+            if (grain->is_at_rest())
                 continue;
 
             // current location
@@ -29,7 +29,7 @@ void Sand::update() {
 
             if (cd.y + step >= grid_.size()) {
                 // the grain is resting on the bottom of the grid
-                grain->setAtRest();
+                grain->set_at_rest();
                 continue;
             }
 
@@ -64,7 +64,7 @@ void Sand::update() {
                 freeGrainsAbove(cd);
             } else {
                 // grain is blocked
-                grain->setAtRest();
+                grain->set_at_rest();
             }
         }
     }
@@ -100,15 +100,15 @@ void Sand::freeGrainsAbove(const sf::Vector2i &location) {
         return;
     auto n = grid_[location.y - 1][location.x];
     if (n != NULL)
-        n->setAtRest(false);
+        n->set_at_rest(false);
     if (location.x - 1 >= 0) {
         n = grid_[location.y - 1][location.x - 1];
         if (n != NULL)
-            n->setAtRest(false);
+            n->set_at_rest(false);
     }
     if (location.x + 1 < grid_.size()) {
         n = grid_[location.y - 1][location.x + 1];
         if (n != NULL)
-            n->setAtRest(false);
+            n->set_at_rest(false);
     }
 }
