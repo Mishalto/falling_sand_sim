@@ -11,10 +11,10 @@ namespace Resolution {
 }
 
 namespace GrainStats {
+    
     constexpr float size = 2;
     constexpr sf::Vector2f size_2f = {size, size};
     constexpr sf::Color color = sf::Color(194, 178, 128);
-    constexpr uint8_t idle_threshold = 50;
 }
 
 namespace Grid {
