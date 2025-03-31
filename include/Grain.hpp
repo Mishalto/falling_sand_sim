@@ -31,7 +31,7 @@ public:
     sf::RectangleShape& get_grain();
     sf::Vector2i& get_coordinate();
 
-    void setAtRest( bool f = true );
+    void setAtRest(bool f = true);
     bool isAtRest() const;
 
 };
