@@ -9,7 +9,7 @@ void Sand::update()
 {
     // move all sand grains that are free to fall downwards
 
-    static constexpr int step = Physics::step;
+    static constexpr int step = 1;
 
     // loop over all the rows of sand grains
     // we start at the bottom because a grain moving my liberate grains higher up

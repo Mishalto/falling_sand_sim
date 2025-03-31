@@ -25,7 +25,3 @@ namespace Grid {
     constexpr int x_cells = Resolution::width / GrainStats::size;
     constexpr int y_cells = Resolution::height / GrainStats::size;
 }
-
-namespace Physics {
-    constexpr int step = 1;
-}

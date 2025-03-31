@@ -15,15 +15,15 @@ Grain::Grain(sf::Vector2i coordinate)
 void Grain::move(sf::Vector2i dir) {
     // This method move the Grain using the given dir * GrainSize
     grain_.move({dir.x * GrainStats::size, dir.y * GrainStats::size});
-    if (dir.y == Physics::step) {
+    if (dir.y == 1) {
         // Down
         coordinate_.y += dir.y;
     }
-    else if (dir.x == Physics::step) {
+    else if (dir.x == 1) {
         // Right
         coordinate_.x += dir.x;
     }
-    else if (dir.x == -Physics::step) {
+    else if (dir.x == -1) {
         // Left
         coordinate_.x += dir.x;
     }
