@@ -9,7 +9,6 @@
 class Grain {
 
 private:
-
     /* This is something to do with drawing the sfml package
     I do not understand it, except that the name of this attribute is very confusing!
     */
