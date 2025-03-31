@@ -2,13 +2,13 @@
 
 #include <SFML/Graphics.hpp>
 
-#include <Sand.hpp>
+#include <ParticleManager.hpp>
 #include <Constants/Constants.hpp>
 
 class Engine {
 
 private:
-    Sand sand_;
+    ParticleManager sand_;
     sf::RenderWindow window_;
 
     void draw();

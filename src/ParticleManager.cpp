@@ -1,10 +1,10 @@
-#include <Sand.hpp>
+#include <ParticleManager.hpp>
 
-Sand::Sand()
+ParticleManager::ParticleManager()
     : grid_(Grid::y_cells, std::vector<grain_t>(Grid::x_cells)) {
 }
 
-void Sand::update() {
+void ParticleManager::update() {
     // move all sand grains that are free to fall downwards
 
     static constexpr int step = 1;
@@ -70,7 +70,7 @@ void Sand::update() {
     }
 }
 
-void Sand::add_grain(sf::Vector2i mouse_pos) {
+void ParticleManager::add_grain(sf::Vector2i mouse_pos) {
     // Grain is created using the mouse pos
 
     // Convert the mouse position to grid coordinates.
@@ -86,7 +86,7 @@ void Sand::add_grain(sf::Vector2i mouse_pos) {
     grid_[grid_pos.y][grid_pos.x] = grain_t(new Grain(grid_pos));
 }
 
-void Sand::draw(sf::RenderWindow &window)
+void ParticleManager::draw(sf::RenderWindow &window)
 {
     for (auto &row : grid_)
         for (auto grain : row)
@@ -94,7 +94,7 @@ void Sand::draw(sf::RenderWindow &window)
                 window.draw(grain->get_grain());
 }
 
-void Sand::freeGrainsAbove(const sf::Vector2i &location) {
+void ParticleManager::freeGrainsAbove(const sf::Vector2i &location) {
     // free grains that may have been blocked;
     if (location.y - 1 < 0)
         return;

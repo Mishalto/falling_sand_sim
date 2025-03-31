@@ -7,7 +7,7 @@
 
 #include <Grain.hpp>
 
-class Sand
+class ParticleManager
 {
 
 private:
@@ -25,7 +25,7 @@ private:
     void freeGrainsAbove(const sf::Vector2i& location);
 
 public:
-    Sand();
+    ParticleManager();
 
     /// move the grains downwards one step
     void update();
