@@ -11,7 +11,6 @@ class Sand
 {
 
 private:
-
     /* Data Structure
 
     A 2D vector containing shared pointers to the simulated grains of sand
@@ -23,7 +22,7 @@ private:
     grid_t grid_;       // storage of the sand grains
 
     // Unblock the grains above a location from which a grain just left
-    void freeGrainsAbove( const sf::Vector2i& location );
+    void freeGrainsAbove(const sf::Vector2i& location);
 
 public:
     Sand();
@@ -35,6 +34,6 @@ public:
     void add_grain(sf::Vector2i mouse_pos);
 
     /// draw all the sand grains
-    void draw( sf::RenderWindow& window);
+    void draw(sf::RenderWindow& window);
 
 };
