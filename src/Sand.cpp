@@ -1,12 +1,10 @@
 #include <Sand.hpp>
 
 Sand::Sand()
-    : grid_(Grid::y_cells, std::vector<grain_t>(Grid::x_cells))
-{
+    : grid_(Grid::y_cells, std::vector<grain_t>(Grid::x_cells)) {
 }
 
-void Sand::update()
-{
+void Sand::update() {
     // move all sand grains that are free to fall downwards
 
     static constexpr int step = 1;
@@ -29,8 +27,7 @@ void Sand::update()
             // current location
             sf::Vector2i cd = grain->get_coordinate();
 
-            if (cd.y + step >= grid_.size())
-            {
+            if (cd.y + step >= grid_.size()) {
                 // the grain is resting on the bottom of the grid
                 grain->setAtRest();
                 continue;
@@ -38,25 +35,22 @@ void Sand::update()
 
             // try moving grain down
             bool fMoved = false;
-            if (grid_[cd.y + step][cd.x] == NULL)
-            {
+            if (grid_[cd.y + step][cd.x] == NULL) {
                 // cell below is empty so grain can fall straight down
                 grain->move({0, step});
                 grid_[cd.y + step][cd.x] = grain;
                 grid_[cd.y][cd.x] = NULL;
                 fMoved = true;
-            }
-            else if (cd.x + step < grid_[0].size() && grid_[cd.y][cd.x + step] == NULL && grid_[cd.y + step][cd.x + step] == NULL)
-            {
+            } else if (cd.x + step < grid_[0].size() && grid_[cd.y][cd.x + step] == NULL &&
+                       grid_[cd.y + step][cd.x + step] == NULL) {
                 // cells on right and down right are available
                 // move right
                 grain->move({step, 0});
                 grid_[cd.y][cd.x + step] = grain;
                 grid_[cd.y][cd.x] = NULL;
                 fMoved = true;
-            }
-            else if (cd.x - step >= 0 && grid_[cd.y][cd.x - step] == NULL && grid_[cd.y + step][cd.x - step] == NULL)
-            {
+            } else if (cd.x - step >= 0 && grid_[cd.y][cd.x - step] == NULL &&
+                       grid_[cd.y + step][cd.x - step] == NULL) {
                 // cells on left and down left are available
                 // move left
                 grain->move({-step, 0});
@@ -65,13 +59,10 @@ void Sand::update()
                 fMoved = true;
             }
 
-            if (fMoved)
-            {
+            if (fMoved) {
                 // free grains that may have been blocked;
                 freeGrainsAbove(cd);
-            }
-            else
-            {
+            } else {
                 // grain is blocked
                 grain->setAtRest();
             }
@@ -79,8 +70,7 @@ void Sand::update()
     }
 }
 
-void Sand::add_grain(sf::Vector2i mouse_pos)
-{
+void Sand::add_grain(sf::Vector2i mouse_pos) {
     // Grain is created using the mouse pos
 
     // Convert the mouse position to grid coordinates.
@@ -104,22 +94,19 @@ void Sand::draw(sf::RenderWindow &window)
                 window.draw(grain->get_grain());
 }
 
-void Sand::freeGrainsAbove(const sf::Vector2i &location)
-{
+void Sand::freeGrainsAbove(const sf::Vector2i &location) {
     // free grains that may have been blocked;
     if (location.y - 1 < 0)
         return;
     auto n = grid_[location.y - 1][location.x];
     if (n != NULL)
         n->setAtRest(false);
-    if (location.x - 1 >= 0)
-    {
+    if (location.x - 1 >= 0) {
         n = grid_[location.y - 1][location.x - 1];
         if (n != NULL)
             n->setAtRest(false);
     }
-    if (location.x + 1 < grid_.size())
-    {
+    if (location.x + 1 < grid_.size()) {
         n = grid_[location.y - 1][location.x + 1];
         if (n != NULL)
             n->setAtRest(false);
