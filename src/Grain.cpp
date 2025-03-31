@@ -1,6 +1,6 @@
 #include <Grain.hpp>
 
-Grain::Grain(sf::Vector2i coordinate) 
+Grain::Grain(sf::Vector2i coordinate)
 : coordinate_(coordinate), fAtRest( false ) {
     // Grain param are set using from Constants.hpp and its grid pos is calc from coordinate_
 
