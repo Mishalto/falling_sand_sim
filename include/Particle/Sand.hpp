@@ -8,9 +8,10 @@
 #include <Constants/Constants.hpp>
 
 class Sand : public Particle {
+    public:
+        // Constructor that initializes sand at the given coordinates (calls base class constructor)
+        Sand(const sf::Vector2i& coord);
 
-public:
-    Sand(const sf::Vector2i& coord);
-
-    void move(sf::Vector2i dir) override;
+        // Moves the sand particle in the specified direction (implements sand movement logic)
+        void move(sf::Vector2i dir) override;
 };
