@@ -8,18 +8,8 @@ Sand::Sand(const sf::Vector2i& coord) : Particle(coord) {
     get_part().setPosition({x, y});
 }
 
- // Rework needed
- // TODO
 void Sand::move(sf::Vector2i dir) {
     get_part().move({dir.x * ParticleStats::size, dir.y * ParticleStats::size});
 
-    if (dir.y == 1) {
-        get_coord().y += dir.y; // Down
-    }
-    else if (dir.x == 1) {
-        get_coord().x += dir.x; // Right
-    }
-    else if (dir.x == -1) {
-        get_coord().x += dir.x; // Left
-    }
+    get_coord() += dir;
 }
