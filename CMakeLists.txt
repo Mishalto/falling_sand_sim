@@ -18,7 +18,7 @@ FetchContent_Declare(SFML
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
-add_executable(falling_sand_sim src/main.cpp src/Engine.cpp src/Grain.cpp src/ParticleManager.cpp)
+add_executable(falling_sand_sim src/main.cpp src/Engine.cpp src/Grain.cpp src/ParticleManager.cpp src/Particle.cpp)
 
 target_include_directories(falling_sand_sim PRIVATE include)
 

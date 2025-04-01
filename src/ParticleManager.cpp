@@ -25,11 +25,11 @@ void ParticleManager::update() {
                 continue;
 
             // current location
-            sf::Vector2i cd = grain->get_coordinate();
+            sf::Vector2i cd = grain->get_coord();
 
             if (cd.y + step >= grid_.size()) {
                 // the grain is resting on the bottom of the grid
-                grain->set_at_rest();
+                grain->set_at_rest(true);
                 continue;
             }
 
@@ -64,7 +64,7 @@ void ParticleManager::update() {
                 freeGrainsAbove(cd);
             } else {
                 // grain is blocked
-                grain->set_at_rest();
+                grain->set_at_rest(true);
             }
         }
     }
@@ -91,7 +91,7 @@ void ParticleManager::draw(sf::RenderWindow &window)
     for (auto &row : grid_)
         for (auto grain : row)
             if (grain != NULL)
-                window.draw(grain->get_grain());
+                window.draw(grain->get_part());
 }
 
 void ParticleManager::freeGrainsAbove(const sf::Vector2i &location) {

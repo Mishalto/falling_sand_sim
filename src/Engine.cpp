@@ -13,7 +13,7 @@ void Engine::start() {
 }
 
 void Engine::update() {
-    sand_.update();
+    particle_pool.update();
 }
 
 void Engine::check_events() {
@@ -30,13 +30,13 @@ void Engine::check_events() {
         if(sf::Mouse::getPosition(window_).y < Resolution::height && sf::Mouse::getPosition(window_).y >= 0
         && sf::Mouse::getPosition(window_).x < Resolution::width && sf::Mouse::getPosition(window_).x >= 0)
         {
-            sand_.add_grain(sf::Mouse::getPosition(window_));
+            particle_pool.add_grain(sf::Mouse::getPosition(window_));
         }
     }
 }
 
 void Engine::draw() {
     window_.clear();
-    sand_.draw( window_);
+    particle_pool.draw( window_);
     window_.display();
 }

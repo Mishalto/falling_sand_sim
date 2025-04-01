@@ -8,7 +8,7 @@
 class Engine {
 
 private:
-    ParticleManager sand_;
+    ParticleManager particle_pool;
     sf::RenderWindow window_;
 
     void draw();
