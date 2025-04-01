@@ -4,18 +4,24 @@
 
 class Particle {
     private:
-        sf::RectangleShape particle_;  // Particle shape
-        sf::Vector2i coordinate_;      // Particle position
-        bool is_at_rest_;              // True if particle is not moving
+        // Particle shape
+        sf::RectangleShape particle_;
+        // Particle position
+        sf::Vector2i coordinate_;
+        // True if particle is not moving
+        bool is_at_rest_;
 
     public:
-        Particle(const sf::Vector2i& coord);  // Constructor, sets position
-
-        virtual void move(sf::Vector2i coord) = 0;  // Moves the particle (must be implemented)
-
-        sf::RectangleShape& get_part();  // Returns the shape
-        sf::Vector2i& get_coord();       // Returns the position
-
-        void set_at_rest(bool cond);  // Sets rest state
-        bool is_at_rest() const;      // Checks if at rest
+        // Constructor, sets position
+        Particle(const sf::Vector2i& coord);
+        // Moves the particle (must be implemented)
+        virtual void move(sf::Vector2i coord) = 0; 
+        // Returns the shape
+        sf::RectangleShape& get_part();
+        // Returns the position
+        sf::Vector2i& get_coord();
+        // Sets rest state
+        void set_at_rest(bool cond);
+        // Checks if at rest
+        bool is_at_rest() const;
     };

@@ -2,7 +2,8 @@
 
 ParticleManager::ParticleManager() : grid_(GridData::y_cells, std::vector<ParticlePtr>(GridData::x_cells)) {}
 
-void ParticleManager::update() {    // move all sand grains that are free to fall downwards
+// move all sand grains that are free to fall downwards
+void ParticleManager::update() {
     static constexpr int s = 1;     // s - step
     // loop over all the rows of sand grains
     // we start at the bottom because a grain moving my liberate grains higher up
@@ -12,8 +13,8 @@ void ParticleManager::update() {    // move all sand grains that are free to fal
             if (grain->is_at_rest()) { continue; }      // check that grain is not blocked
 
             sf::Vector2i cd = grain->get_coord();       // current location
-
-            if (cd.y + s >= grid_.size()) {             // the grain is resting on the bottom of the grid
+            // the grain is resting on the bottom of the grid
+            if (cd.y + s >= grid_.size()) {
                 grain->set_at_rest(true);
                 continue;
             }
@@ -36,18 +37,19 @@ void ParticleManager::update() {    // move all sand grains that are free to fal
             if (fMoved) {
                 free_grains_above(cd);      // free grains that may have been blocked;
             } else {
-                grain->set_at_rest(true); // grain is blocked
+                grain->set_at_rest(true);   // grain is blocked
             }
         }
     }
 }
-
-void ParticleManager::add_particle(sf::Vector2i mouse_pos) {            // Grain is created using the mouse pos
-    sf::Vector2i grid_pos = {                                           // Convert the mouse position to grid coordinates.
+// Grain is created using the mouse pos
+// Convert the mouse position to grid coordinates.
+void ParticleManager::add_particle(sf::Vector2i mouse_pos) {
+    sf::Vector2i grid_pos = {
         static_cast<int>(mouse_pos.x / ParticleStats::size),
         static_cast<int>(mouse_pos.y / ParticleStats::size)};
-
-    if (grid_[grid_pos.y][grid_pos.x] != nullptr)                       // check that there is no grain already at this position
+// check that there is no grain already at this position
+    if (grid_[grid_pos.y][grid_pos.x] != nullptr)
         return;
     grid_[grid_pos.y][grid_pos.x] = ParticlePtr(new Sand(grid_pos));    // construct the grain
 }
