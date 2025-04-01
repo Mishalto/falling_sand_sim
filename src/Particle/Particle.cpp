@@ -6,7 +6,6 @@ Particle::Particle(const sf::Vector2i& coord) : coordinate_(coord), is_at_rest_(
 sf::RectangleShape& Particle::get_part() {
     return particle_;
 }
-
 // Returns a reference to the particle coordinates
 sf::Vector2i& Particle::get_coord() {
     return coordinate_;
