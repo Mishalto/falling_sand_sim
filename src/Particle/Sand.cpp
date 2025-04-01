@@ -1,4 +1,5 @@
 #include <Sand.hpp>
+
 // The constructor initializes the sand particle with default values, determining its position based on the given coordinates (mouse coordinates).
 Sand::Sand(const sf::Vector2i& coord) : Particle(coord) {
     sf::Vector2f calc_cd = {coord.x * ParticleStats::size, coord.y * ParticleStats::size};
@@ -15,7 +16,7 @@ bool Sand::is_move(GridPtr& grid) {
         set_at_rest(true);
         return false;
     }
-    // Check all direction
+    // Check all directions
     if (bottom_is_free(grid, cd)) {
         move({0, 1});   // To bottom
         grid[cd.y + 1][cd.x] = std::move(grid[cd.y][cd.x]);

@@ -76,7 +76,7 @@ void ParticleManager::free_grains_above(const sf::Vector2i& location) {
 void ParticleManager::draw(sf::RenderWindow &window) {
     for (auto &row : grid_)
         for (auto grain : row)
-            if (grain != nullptr) 
+            if (grain != nullptr)
             {
                 window.draw(grain->get_part());
             }
