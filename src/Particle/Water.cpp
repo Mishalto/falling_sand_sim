@@ -8,28 +8,23 @@ Water::Water(const sf::Vector2i& coord) : Particle(coord) {
     get_part().setPosition(calc_cd);
 }
 
-bool Water::is_move(GridPtr& grid) {
+void Water::is_move(GridPtr& grid) {
     sf::Vector2i cd = get_coord();
     // Check out of bounds
     if (cd.y + 1 >= grid.size()) {
         set_at_rest(true);
-        return false;
     }
     // Check all directions
     if (bottom_is_free(grid, cd)) {
         move({0, 1});   // To bottom
         grid[cd.y + 1][cd.x] = std::move(grid[cd.y][cd.x]);
-        return true;
     } else if (bottom_right_is_free(grid, cd)) {
         move({1, 0});   // To right
         grid[cd.y][cd.x + 1] = std::move(grid[cd.y][cd.x]);
-        return true;
     } else if (bottom_left_is_free(grid, cd)) {
         move({-1, 0});  // To left
         grid[cd.y][cd.x - 1] = std::move(grid[cd.y][cd.x]);
-        return true;
     } else { set_at_rest(true); }
-    return false;
 }
 
 // Checking availability of the bottom, bottom-left, and bottom-right.
