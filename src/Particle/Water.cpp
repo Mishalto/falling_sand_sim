@@ -13,6 +13,7 @@ void Water::is_move(GridPtr& grid) {
     // Check out of bounds
     if (cd.y + 1 >= grid.size()) {
         set_at_rest(true);
+        return;
     }
     // Check all directions
     if (bottom_is_free(grid, cd)) {

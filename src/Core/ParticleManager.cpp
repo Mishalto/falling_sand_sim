@@ -17,17 +17,7 @@ void ParticleManager::update() {
             // Get current particle position
             sf::Vector2i cd = part->get_coord();
 
-            // Track if particle has moved
-            // bool fMoved = false;
             part->is_move(grid_);
-
-            // If particle moved, free particles above it
-            // Else mark particle as at rest if it didn't move
-            // if (fMoved) {
-            //     free_grains_above(cd);
-            // } else {
-            //     part->set_at_rest(true);
-            // }
         }
     }
 }
