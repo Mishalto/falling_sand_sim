@@ -3,18 +3,19 @@
 #include <SFML/Graphics.hpp>
 
 class Particle {
-private:
-    sf::RectangleShape particle_;
-    sf::Vector2i coordinate_;
-    bool is_at_rest_;
-public:
-    Particle(const sf::Vector2i& coord);
+    private:
+        sf::RectangleShape particle_;  // Particle shape
+        sf::Vector2i coordinate_;      // Particle position
+        bool is_at_rest_;              // True if particle is not moving
 
-    virtual void move(sf::Vector2i coord) = 0;
+    public:
+        Particle(const sf::Vector2i& coord);  // Constructor, sets position
 
-    sf::RectangleShape& get_part();
-    sf::Vector2i& get_coord();
+        virtual void move(sf::Vector2i coord) = 0;  // Moves the particle (must be implemented)
 
-    void set_at_rest(bool cond);
-    bool is_at_rest() const;
-};
+        sf::RectangleShape& get_part();  // Returns the shape
+        sf::Vector2i& get_coord();       // Returns the position
+
+        void set_at_rest(bool cond);  // Sets rest state
+        bool is_at_rest() const;      // Checks if at rest
+    };
