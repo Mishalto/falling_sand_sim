@@ -6,30 +6,32 @@ Sand::Sand(const sf::Vector2i& coord) : Particle(coord) {
     get_part().setFillColor(sf::Color(194, 178, 128));  // RGB combination for sand color
     get_part().setPosition(calc_cd);
 }
-// Moves the sand particle in the specified direction (implements sand movement logic)
-bool Sand::move(std::vector<std::vector<std::shared_ptr<Particle>>>& grid) {
+// Moves the sand particle in the specified direction (implements sand movement
+// logic)
+bool Sand::is_move(GridPtr& grid) {
     sf::Vector2i cd = get_coord();
 
     // need changes
     if (grid[cd.y + 1][cd.x] == nullptr) {
-        get_part().move({0 * ParticleStats::size, 1 * ParticleStats::size});
+        move({0, 1});
         grid[cd.y + 1][cd.x] = std::move(grid[cd.y][cd.x]);
-        get_coord() += {0, 1};
         return true;
     } else if (cd.x + 1 < grid[0].size() && grid[cd.y][cd.x + 1] == nullptr &&
-    grid[cd.y + 1][cd.x + 1] == nullptr) {
-        get_part().move({1 * ParticleStats::size, 0 * ParticleStats::size});
+               grid[cd.y + 1][cd.x + 1] == nullptr) {
+        move({1, 0});
         grid[cd.y][cd.x + 1] = std::move(grid[cd.y][cd.x]);
-        get_coord() += {1, 0};
         return true;
     } else if (cd.x - 1 >= 0 && grid[cd.y][cd.x - 1] == nullptr &&
-        grid[cd.y + 1][cd.x - 1] == nullptr) {
-            get_part().move({-1 * ParticleStats::size, 0 * ParticleStats::size});
-            grid[cd.y][cd.x - 1] = std::move(grid[cd.y][cd.x]);
-            get_coord() += {-1, 0};
-            return true;
-        } else {
-            set_at_rest(true);
-            return false;
-        }
+               grid[cd.y + 1][cd.x - 1] == nullptr) {
+        move({-1, 0});
+        grid[cd.y][cd.x - 1] = std::move(grid[cd.y][cd.x]);
+        return true;
+    } else { set_at_rest(true); }
+
+    return false;
+}
+
+void Sand::move(const sf::Vector2i& dir) {
+    get_part().move({dir.x * ParticleStats::size, dir.y * ParticleStats::size});
+    get_coord() += {dir.x, dir.y};
 }

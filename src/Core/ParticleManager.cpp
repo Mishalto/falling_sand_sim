@@ -9,7 +9,7 @@ void ParticleManager::update() {
     // we start at the bottom because a grain moving my liberate grains higher up
     for (int krow = grid_.size() - 1; krow >= 0; krow--) {
         for (auto& part : grid_[krow]) {
-            // skip empty cells
+            // Skip empty cells
             if (part == nullptr) { continue; }
             // Skip particles that are already at rest
             if (part->is_at_rest()) { continue; }
@@ -23,7 +23,7 @@ void ParticleManager::update() {
             }
             // Track if particle has moved
             bool fMoved = false;
-            if (part->move(grid_)) { fMoved = true; }
+            if (part->is_move(grid_)) { fMoved = true; }
             // If particle moved, free particles above it
             // Else mark particle as at rest if it didn't move
             if (fMoved) {
