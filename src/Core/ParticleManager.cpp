@@ -70,7 +70,7 @@ void ParticleManager::freeGrainsAbove(const sf::Vector2i& location) {
         if (n != nullptr)
             n->set_at_rest(false);
     }
-    if (location.x + 1 < grid_.size()) {
+    if (location.x + 1 < grid_[0].size()) {
         n = grid_[location.y - 1][location.x + 1];
         if (n != nullptr)
             n->set_at_rest(false);
