@@ -60,8 +60,7 @@ void ParticleManager::draw(sf::RenderWindow &window) {
 
 void ParticleManager::freeGrainsAbove(const sf::Vector2i& location) {
     // free grains that may have been blocked;
-    if (location.y - 1 < 0)
-        return;
+    if (location.y - 1 < 0) { return; }
     auto n = grid_[location.y - 1][location.x];
     if (n != nullptr)
         n->set_at_rest(false);
