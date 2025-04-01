@@ -2,7 +2,7 @@
 This project is a falling sand simulator implemented in C++ using the SFML library for graphical rendering.
 
 ## Software Design
-This project uses a 2D grid to simulate falling sand, managing particle behavior dynamically. The Engine class controls the simulation, while the Sand class contains the most computationally expensive algorithms and core logic.
+This project uses a 2D grid to simulate falling sand, managing particle behavior dynamically. The Engine class controls the simulation, while the ParticleManager class contains the most computationally expensive algorithms and core logic.
 Most parameters, such as screen resolution and grid size, are managed through Constants/Constants.hpp.
 
 ## Requirements
