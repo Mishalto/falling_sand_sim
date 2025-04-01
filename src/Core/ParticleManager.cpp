@@ -4,7 +4,6 @@ ParticleManager::ParticleManager() : grid_(Grid::y_cells, std::vector<grain_t>(G
 
 void ParticleManager::update() {    // move all sand grains that are free to fall downwards
     static constexpr int step = 1;
-
     // loop over all the rows of sand grains
     // we start at the bottom because a grain moving my liberate grains higher up
     for (int krow = grid_.size() - 1; krow >= 0; krow--) {
@@ -18,7 +17,6 @@ void ParticleManager::update() {    // move all sand grains that are free to fal
                 grain->set_at_rest(true);
                 continue;
             }
-
             // try moving grain down
             bool fMoved = false;
             if (grid_[cd.y + step][cd.x] == nullptr) {  // cell below is empty so grain can fall straight down
