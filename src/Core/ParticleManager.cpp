@@ -34,7 +34,7 @@ void ParticleManager::update() {    // move all sand grains that are free to fal
             }
 
             if (fMoved) {
-                freeGrainsAbove(cd);      // free grains that may have been blocked;
+                free_grains_above(cd);      // free grains that may have been blocked;
             } else {
                 grain->set_at_rest(true); // grain is blocked
             }
@@ -52,7 +52,7 @@ void ParticleManager::add_particle(sf::Vector2i mouse_pos) {            // Grain
     grid_[grid_pos.y][grid_pos.x] = ParticlePtr(new Sand(grid_pos));    // construct the grain
 }
 
-void ParticleManager::freeGrainsAbove(const sf::Vector2i& location) {
+void ParticleManager::free_grains_above(const sf::Vector2i& location) {
     // free grains that may have been blocked;
     if (location.y - 1 < 0) { return; }
     auto n = grid_[location.y - 1][location.x];

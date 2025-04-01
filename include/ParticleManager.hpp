@@ -11,12 +11,13 @@
 
 class ParticleManager {
 private:
-    /* 2D vector of shared pointers to sand grains */
+    /* 2D vector of shared pointers to Particle */
     using ParticlePtr = std::shared_ptr<Particle>;
     using Grid = std::vector<std::vector<ParticlePtr>>;
-    Grid grid_;       // storage of the sand grains
+    // storage of the sand grains
+    Grid grid_;
 
-    void freeGrainsAbove(const sf::Vector2i& location); // Unblock the grains above a location from which a grain just left
+    void free_grains_above(const sf::Vector2i& location); // Unblock the grains above a location from which a grain just left
 
     // Checks if adjacent cells in the specified direction are empty to allow particle movement.
     bool bottom_is_empty(const sf::Vector2i& cd) const;
