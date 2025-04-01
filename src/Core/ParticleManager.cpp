@@ -54,15 +54,24 @@ void ParticleManager::add_particle(sf::Vector2i mouse_pos) {            // Grain
 
 void ParticleManager::free_grains_above(const sf::Vector2i& location) {
     // free grains that may have been blocked;
+
+    // check if grain is on window bottom - always blocked
     if (location.y - 1 < 0) { return; }
+
+    // ensure grain above, if present, is free
     auto n = grid_[location.y - 1][location.x];
     if (n != nullptr)
         n->set_at_rest(false);
+
+    // ensure grain above left, if present, is free
     if (location.x - 1 >= 0) {
         n = grid_[location.y - 1][location.x - 1];
         if (n != nullptr)
             n->set_at_rest(false);
     }
+
+    // ensure grain above right, if present, is free
+    // check for right boundary ( fix TID20 )
     if (location.x + 1 < grid_[0].size()) {
         n = grid_[location.y - 1][location.x + 1];
         if (n != nullptr)
