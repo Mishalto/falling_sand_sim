@@ -18,26 +18,17 @@ void ParticleManager::update() {
                 part->set_at_rest(true);
                 continue;
             }
-            // try moving grain down
-                part->move(grid_);
+            bool fMoved = false;
+            if(part->move(grid_)) {
+                fMoved = true;
             }
-            // else if (bottom_right_is_empty(cd)) {
-            //     part->move({s, 0});
-            //     grid_[cd.y][cd.x + s] = std::move(grid_[cd.y][cd.x]);
-            //     fMoved = true;
-            // } else if (bottom_left_is_empty(cd)) {
-            //     part->move({-s, 0});
-            //     grid_[cd.y][cd.x - s] = std::move(grid_[cd.y][cd.x]);;
-            //     fMoved = true;
-            // }
 
-            // if (fMoved) {
-            //     free_grains_above(cd);      // free grains that may have been blocked;
-            // } else {
-            //     part->set_at_rest(true);   // grain is blocked
-            // }
-    }
-}
+            if (fMoved) {
+                free_grains_above(cd);
+            } else {
+                part->set_at_rest(true);
+            }
+    }}}
 // Grain is created using the mouse pos
 // Convert the mouse position to grid coordinates.
 void ParticleManager::add_particle(sf::Vector2i mouse_pos) {
@@ -75,19 +66,6 @@ void ParticleManager::free_grains_above(const sf::Vector2i& location) {
         if (n != nullptr)
             n->set_at_rest(false);
     }
-}
-
-// Checks if adjacent cells in the specified direction are empty to allow particle movement.
-bool ParticleManager::bottom_is_empty(const sf::Vector2i& cd) const {
-    return grid_[cd.y + 1][cd.x] == nullptr;
-}
-bool ParticleManager::bottom_right_is_empty(const sf::Vector2i& cd) const {
-    return cd.x + 1 < grid_[0].size() && grid_[cd.y][cd.x + 1] == nullptr &&
-    grid_[cd.y + 1][cd.x + 1] == nullptr;
-}
-bool ParticleManager::bottom_left_is_empty(const sf::Vector2i& cd) const {
-    return cd.x - 1 >= 0 && grid_[cd.y][cd.x - 1] == nullptr &&
-    grid_[cd.y + 1][cd.x - 1] == nullptr;
 }
 
 void ParticleManager::draw(sf::RenderWindow &window) {
