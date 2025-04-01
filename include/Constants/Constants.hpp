@@ -13,7 +13,6 @@ namespace Resolution {
 namespace ParticleStats {
     constexpr float size = 2;   // Defines the size of a single grain of sand in pixels
     constexpr sf::Vector2f size_2f = {size, size};  // Represents the size as a 2D vector (used for rendering)
-    constexpr sf::Color color = sf::Color(194, 178, 128);   // Defines the default color of the sand grains (light brown)
 }
 
 namespace GridData {
