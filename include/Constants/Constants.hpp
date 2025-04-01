@@ -16,10 +16,9 @@ namespace ParticleStats {
     constexpr sf::Color color = sf::Color(194, 178, 128);   // Defines the default color of the sand grains (light brown)
 }
 
-namespace Grid {
+namespace GridData {
     // Calculates the number of horizontal grid cells based on screen width and grain size
     constexpr int x_cells = Resolution::width / ParticleStats::size;
-
     // Calculates the number of vertical grid cells based on screen height and grain size
     constexpr int y_cells = Resolution::height / ParticleStats::size;
 }
