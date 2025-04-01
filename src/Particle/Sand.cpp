@@ -1,6 +1,6 @@
-#include <Grain.hpp>
+#include <Sand.hpp>
 
-Grain::Grain(sf::Vector2i coord) : Particle(coord) {
+Sand::Sand(sf::Vector2i coord) : Particle(coord) {
     get_part().setSize(GrainStats::size_2f);
     get_part().setFillColor(GrainStats::color);
     float x = coord.x * GrainStats::size;
@@ -8,9 +8,7 @@ Grain::Grain(sf::Vector2i coord) : Particle(coord) {
     get_part().setPosition({x, y});
 }
 
-void Grain::move(sf::Vector2i dir) {
-    // This method move the Grain using the given dir * GrainSize
-    // grain_move({dir.x * GrainStats::size, dir.y * GrainStats::size});
+void Sand::move(sf::Vector2i dir) {
     get_part().move({dir.x * GrainStats::size, dir.y * GrainStats::size});
     if (dir.y == 1) {
         // Down

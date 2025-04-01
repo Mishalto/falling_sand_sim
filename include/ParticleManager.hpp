@@ -5,7 +5,9 @@
 
 #include <SFML/Graphics.hpp>
 
-#include <Grain.hpp>
+#include <Particle.hpp>
+#include <Sand.hpp>
+#include <Constants/Constants.hpp>
 
 class ParticleManager
 {
@@ -16,7 +18,7 @@ private:
     A 2D vector containing shared pointers to the simulated grains of sand
 
     */
-    typedef std::shared_ptr<Grain> grain_t;
+    typedef std::shared_ptr<Particle> grain_t;
     typedef std::vector<std::vector<grain_t>> grid_t;
 
     grid_t grid_;       // storage of the sand grains

@@ -83,7 +83,7 @@ void ParticleManager::add_grain(sf::Vector2i mouse_pos) {
         return;
 
     // construct the grain
-    grid_[grid_pos.y][grid_pos.x] = grain_t(new Grain(grid_pos));
+    grid_[grid_pos.y][grid_pos.x] = grain_t(new Sand(grid_pos));
 }
 
 void ParticleManager::draw(sf::RenderWindow &window)
