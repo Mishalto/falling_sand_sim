@@ -13,21 +13,21 @@ void ParticleManager::update() {    // move all sand grains that are free to fal
 
             sf::Vector2i cd = grain->get_coord();       // current location
 
-            if (cd.y + s >= grid_.size()) {          // the grain is resting on the bottom of the grid
+            if (cd.y + s >= grid_.size()) {             // the grain is resting on the bottom of the grid
                 grain->set_at_rest(true);
                 continue;
             }
             // try moving grain down
             bool fMoved = false;
-            if (bottom_is_empty(cd, {0, 1})) {  // cell below is empty so grain can fall straight down
+            if (bottom_is_empty(cd)) {
                 grain->move({0, s});
                 grid_[cd.y + s][cd.x] = std::move(grid_[cd.y][cd.x]);
                 fMoved = true;
-            } else if (bottom_right_is_empty(cd, {1, 1})) {                            // move right
+            } else if (bottom_right_is_empty(cd)) {
                 grain->move({s, 0});
                 grid_[cd.y][cd.x + s] = std::move(grid_[cd.y][cd.x]);
                 fMoved = true;
-            } else if (bottom_left_is_empty(cd, {1, 1})) {                // move left
+            } else if (bottom_left_is_empty(cd)) {
                 grain->move({-s, 0});
                 grid_[cd.y][cd.x - s] = std::move(grid_[cd.y][cd.x]);;
                 fMoved = true;
@@ -70,18 +70,19 @@ void ParticleManager::freeGrainsAbove(const sf::Vector2i& location) {
     }
 }
 
-void ParticleManager::draw(sf::RenderWindow &window) {
-    for (auto &row : grid_) for (auto grain : row) if (grain != nullptr) { window.draw(grain->get_part()); }
+// Checks if adjacent cells in the specified direction are empty to allow particle movement.
+bool ParticleManager::bottom_is_empty(const sf::Vector2i& cd) const {
+    return grid_[cd.y + 1][cd.x] == nullptr;
+}
+bool ParticleManager::bottom_right_is_empty(const sf::Vector2i& cd) const {
+    return cd.x + 1 < grid_[0].size() && grid_[cd.y][cd.x + 1] == nullptr &&
+    grid_[cd.y + 1][cd.x + 1] == nullptr;
+}
+bool ParticleManager::bottom_left_is_empty(const sf::Vector2i& cd) const {
+    return cd.x - 1 >= 0 && grid_[cd.y][cd.x - 1] == nullptr &&
+    grid_[cd.y + 1][cd.x - 1] == nullptr;
 }
 
-bool ParticleManager::bottom_is_empty(const sf::Vector2i& cd, const sf::Vector2i& dir) const {
-    return grid_[cd.y + dir.y][cd.x] == nullptr;
-}
-bool ParticleManager::bottom_right_is_empty(const sf::Vector2i& cd, const sf::Vector2i& dir) const {
-    return cd.x + dir.x < grid_[0].size() && grid_[cd.y][cd.x + dir.x] == nullptr &&
-    grid_[cd.y + dir.y][cd.x + dir.x] == nullptr;
-}
-bool ParticleManager::bottom_left_is_empty(const sf::Vector2i& cd, const sf::Vector2i& dir) const {
-    return cd.x - dir.x >= 0 && grid_[cd.y][cd.x - dir.x] == nullptr &&
-    grid_[cd.y + dir.y][cd.x - dir.x] == nullptr;
+void ParticleManager::draw(sf::RenderWindow &window) {
+    for (auto &row : grid_) for (auto grain : row) if (grain != nullptr) { window.draw(grain->get_part()); }
 }

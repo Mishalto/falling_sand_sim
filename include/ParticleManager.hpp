@@ -17,9 +17,11 @@ private:
     Grid grid_;       // storage of the sand grains
 
     void freeGrainsAbove(const sf::Vector2i& location); // Unblock the grains above a location from which a grain just left
-    bool bottom_is_empty(const sf::Vector2i& cd, const sf::Vector2i& dir) const;
-    bool bottom_right_is_empty(const sf::Vector2i& cd, const sf::Vector2i& dir) const;
-    bool bottom_left_is_empty(const sf::Vector2i& cd, const sf::Vector2i& dir) const;
+
+    // Checks if adjacent cells in the specified direction are empty to allow particle movement.
+    bool bottom_is_empty(const sf::Vector2i& cd) const;
+    bool bottom_right_is_empty(const sf::Vector2i& cd) const;
+    bool bottom_left_is_empty(const sf::Vector2i& cd) const;
 public:
     ParticleManager();
 
