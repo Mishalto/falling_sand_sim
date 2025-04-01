@@ -8,7 +8,7 @@ private:
     sf::Vector2i coordinate_;
     bool is_at_rest_;
 public:
-    Particle(sf::Vector2i coord);
+    Particle(const sf::Vector2i& coord);
 
     virtual void move(sf::Vector2i coord) = 0;
 

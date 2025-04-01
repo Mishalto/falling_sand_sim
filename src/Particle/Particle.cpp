@@ -1,6 +1,6 @@
 #include <Particle.hpp>
 
-Particle::Particle(sf::Vector2i coord) : coordinate_(coord), is_at_rest_(false) {}
+Particle::Particle(const sf::Vector2i& coord) : coordinate_(coord), is_at_rest_(false) {}
 
 sf::RectangleShape& Particle::get_part() {
     return particle_;

@@ -1,6 +1,6 @@
 #include <Sand.hpp>
 
-Sand::Sand(sf::Vector2i coord) : Particle(coord) {
+Sand::Sand(const sf::Vector2i& coord) : Particle(coord) {
     get_part().setSize(ParticleStats::size_2f);
     get_part().setFillColor(ParticleStats::color);
     float x = coord.x * ParticleStats::size;
