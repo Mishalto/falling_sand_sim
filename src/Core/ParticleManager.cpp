@@ -8,38 +8,34 @@ void ParticleManager::update() {
     // loop over all the rows of sand grains
     // we start at the bottom because a grain moving my liberate grains higher up
     for (int krow = grid_.size() - 1; krow >= 0; krow--) {
-        for (auto& grain : grid_[krow]) {               // loop over the grains in the row
-            if (grain == nullptr) { continue; }         // check that location holds a grain
-            if (grain->is_at_rest()) { continue; }      // check that grain is not blocked
+        for (auto& part : grid_[krow]) {               // loop over the grains in the row
+            if (part == nullptr) { continue; }         // check that location holds a grain
+            if (part->is_at_rest()) { continue; }      // check that grain is not blocked
 
-            sf::Vector2i cd = grain->get_coord();       // current location
+            sf::Vector2i cd = part->get_coord();       // current location
             // the grain is resting on the bottom of the grid
             if (cd.y + s >= grid_.size()) {
-                grain->set_at_rest(true);
+                part->set_at_rest(true);
                 continue;
             }
             // try moving grain down
-            bool fMoved = false;
-            if (bottom_is_empty(cd)) {
-                grain->move({0, s});
-                grid_[cd.y + s][cd.x] = std::move(grid_[cd.y][cd.x]);
-                fMoved = true;
-            } else if (bottom_right_is_empty(cd)) {
-                grain->move({s, 0});
-                grid_[cd.y][cd.x + s] = std::move(grid_[cd.y][cd.x]);
-                fMoved = true;
-            } else if (bottom_left_is_empty(cd)) {
-                grain->move({-s, 0});
-                grid_[cd.y][cd.x - s] = std::move(grid_[cd.y][cd.x]);;
-                fMoved = true;
+                part->move(grid_);
             }
+            // else if (bottom_right_is_empty(cd)) {
+            //     part->move({s, 0});
+            //     grid_[cd.y][cd.x + s] = std::move(grid_[cd.y][cd.x]);
+            //     fMoved = true;
+            // } else if (bottom_left_is_empty(cd)) {
+            //     part->move({-s, 0});
+            //     grid_[cd.y][cd.x - s] = std::move(grid_[cd.y][cd.x]);;
+            //     fMoved = true;
+            // }
 
-            if (fMoved) {
-                free_grains_above(cd);      // free grains that may have been blocked;
-            } else {
-                grain->set_at_rest(true);   // grain is blocked
-            }
-        }
+            // if (fMoved) {
+            //     free_grains_above(cd);      // free grains that may have been blocked;
+            // } else {
+            //     part->set_at_rest(true);   // grain is blocked
+            // }
     }
 }
 // Grain is created using the mouse pos
@@ -95,5 +91,10 @@ bool ParticleManager::bottom_left_is_empty(const sf::Vector2i& cd) const {
 }
 
 void ParticleManager::draw(sf::RenderWindow &window) {
-    for (auto &row : grid_) for (auto grain : row) if (grain != nullptr) { window.draw(grain->get_part()); }
+    for (auto &row : grid_)
+        for (auto grain : row)
+            if (grain != nullptr) 
+            {
+                window.draw(grain->get_part());
+            }
 }

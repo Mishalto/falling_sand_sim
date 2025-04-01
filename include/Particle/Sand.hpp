@@ -12,5 +12,5 @@ class Sand : public Particle {
         // Constructor that initializes sand at the given coordinates (calls base class constructor)
         Sand(const sf::Vector2i& coord);
         // Moves the sand particle in the specified direction (implements sand movement logic)
-        void move(sf::Vector2i dir) override;
+        void move(std::vector<std::vector<std::shared_ptr<Particle>>>& grid) override;
 };
