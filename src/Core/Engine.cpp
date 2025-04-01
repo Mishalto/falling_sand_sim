@@ -30,7 +30,7 @@ void Engine::check_events() {
         if(sf::Mouse::getPosition(window_).y < Resolution::height && sf::Mouse::getPosition(window_).y >= 0
         && sf::Mouse::getPosition(window_).x < Resolution::width && sf::Mouse::getPosition(window_).x >= 0)
         {
-            particle_pool.add_grain(sf::Mouse::getPosition(window_));
+            particle_pool.add_particle(sf::Mouse::getPosition(window_));
         }
     }
 }

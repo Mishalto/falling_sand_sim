@@ -23,19 +23,12 @@ private:
 
     grid_t grid_;       // storage of the sand grains
 
-    // Unblock the grains above a location from which a grain just left
-    void freeGrainsAbove(const sf::Vector2i& location);
+    void freeGrainsAbove(const sf::Vector2i& location); // Unblock the grains above a location from which a grain just left
 
 public:
     ParticleManager();
 
-    /// move the grains downwards one step
-    void update();
-
-    /// add sand grain at position of mouse cursor
-    void add_grain(sf::Vector2i mouse_pos);
-
-    /// draw all the sand grains
-    void draw(sf::RenderWindow& window);
-
+    void update();  // move the grains downwards one step
+    void add_particle(sf::Vector2i mouse_pos); // add sand grain at position of mouse cursor
+    void draw(sf::RenderWindow& window);    // draw all the sand grains
 };

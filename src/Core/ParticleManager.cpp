@@ -70,7 +70,7 @@ void ParticleManager::update() {
     }
 }
 
-void ParticleManager::add_grain(sf::Vector2i mouse_pos) {
+void ParticleManager::add_particle(sf::Vector2i mouse_pos) {
     // Grain is created using the mouse pos
 
     // Convert the mouse position to grid coordinates.

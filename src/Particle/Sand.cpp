@@ -10,6 +10,7 @@ Sand::Sand(sf::Vector2i coord) : Particle(coord) {
 
 void Sand::move(sf::Vector2i dir) {
     get_part().move({dir.x * GrainStats::size, dir.y * GrainStats::size});
+
     if (dir.y == 1) {
         // Down
         get_coord().y += dir.y;
