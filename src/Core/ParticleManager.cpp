@@ -30,35 +30,28 @@ void ParticleManager::update() {
 
             // try moving grain down
             bool fMoved = false;
-            if (grid_[cd.y + step][cd.x] == nullptr) {
-                // cell below is empty so grain can fall straight down
+            if (grid_[cd.y + step][cd.x] == nullptr) {  // cell below is empty so grain can fall straight down
                 grain->move({0, step});
                 grid_[cd.y + step][cd.x] = grain;
                 grid_[cd.y][cd.x] = nullptr;
                 fMoved = true;
-            } else if (cd.x + step < grid_[0].size() && grid_[cd.y][cd.x + step] == NULL &&
-                       grid_[cd.y + step][cd.x + step] == nullptr) {
-                // cells on right and down right are available
-                // move right
+            } else if (cd.x + step < grid_[0].size() && grid_[cd.y][cd.x + step] == nullptr &&  // cells on right and down right are available
+                       grid_[cd.y + step][cd.x + step] == nullptr) {                            // move right
                 grain->move({step, 0});
                 grid_[cd.y][cd.x + step] = grain;
                 grid_[cd.y][cd.x] = nullptr;
                 fMoved = true;
-            } else if (cd.x - step >= 0 && grid_[cd.y][cd.x - step] == NULL &&
-                       grid_[cd.y + step][cd.x - step] == nullptr) {
-                // cells on left and down left are available
-                // move left
+            } else if (cd.x - step >= 0 && grid_[cd.y][cd.x - step] == nullptr &&   // cells on left and down left are available
+                       grid_[cd.y + step][cd.x - step] == nullptr) {                // move left
                 grain->move({-step, 0});
                 grid_[cd.y][cd.x - step] = grain;
                 grid_[cd.y][cd.x] = nullptr;
                 fMoved = true;
             }
 
-            if (fMoved) {
-                // free grains that may have been blocked;
+            if (fMoved) {   // free grains that may have been blocked;
                 freeGrainsAbove(cd);
-            } else {
-                // grain is blocked
+            } else {        // grain is blocked
                 grain->set_at_rest(true);
             }
         }
