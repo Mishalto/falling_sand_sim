@@ -3,7 +3,7 @@
 ParticleManager::ParticleManager() : grid_(GridData::y_cells, std::vector<ParticlePtr>(GridData::x_cells)) {}
 
 void ParticleManager::update() {    // move all sand grains that are free to fall downwards
-    static constexpr int step = 1;
+    static constexpr int s = 1;     // s - step
     // loop over all the rows of sand grains
     // we start at the bottom because a grain moving my liberate grains higher up
     for (int krow = grid_.size() - 1; krow >= 0; krow--) {
@@ -13,25 +13,25 @@ void ParticleManager::update() {    // move all sand grains that are free to fal
 
             sf::Vector2i cd = grain->get_coord();       // current location
 
-            if (cd.y + step >= grid_.size()) {          // the grain is resting on the bottom of the grid
+            if (cd.y + s >= grid_.size()) {          // the grain is resting on the bottom of the grid
                 grain->set_at_rest(true);
                 continue;
             }
             // try moving grain down
             bool fMoved = false;
-            if (grid_[cd.y + step][cd.x] == nullptr) {  // cell below is empty so grain can fall straight down
-                grain->move({0, step});
-                grid_[cd.y + step][cd.x] = std::move(grid_[cd.y][cd.x]);
+            if (grid_[cd.y + s][cd.x] == nullptr) {  // cell below is empty so grain can fall straight down
+                grain->move({0, s});
+                grid_[cd.y + s][cd.x] = std::move(grid_[cd.y][cd.x]);
                 fMoved = true;
-            } else if (cd.x + step < grid_[0].size() && grid_[cd.y][cd.x + step] == nullptr &&  // cells on right and down right are available
-                       grid_[cd.y + step][cd.x + step] == nullptr) {                            // move right
-                grain->move({step, 0});
-                grid_[cd.y][cd.x + step] = std::move(grid_[cd.y][cd.x]);
+            } else if (cd.x + s < grid_[0].size() && grid_[cd.y][cd.x + s] == nullptr &&  // cells on right and down right are available
+                       grid_[cd.y + s][cd.x + s] == nullptr) {                            // move right
+                grain->move({s, 0});
+                grid_[cd.y][cd.x + s] = std::move(grid_[cd.y][cd.x]);
                 fMoved = true;
-            } else if (cd.x - step >= 0 && grid_[cd.y][cd.x - step] == nullptr &&   // cells on left and down left are available
-                       grid_[cd.y + step][cd.x - step] == nullptr) {                // move left
-                grain->move({-step, 0});
-                grid_[cd.y][cd.x - step] = std::move(grid_[cd.y][cd.x]);;
+            } else if (cd.x - s >= 0 && grid_[cd.y][cd.x - s] == nullptr &&   // cells on left and down left are available
+                       grid_[cd.y + s][cd.x - s] == nullptr) {                // move left
+                grain->move({-s, 0});
+                grid_[cd.y][cd.x - s] = std::move(grid_[cd.y][cd.x]);;
                 fMoved = true;
             }
 
