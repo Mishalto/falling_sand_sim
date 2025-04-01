@@ -18,10 +18,10 @@ private:
     A 2D vector containing shared pointers to the simulated grains of sand
 
     */
-    typedef std::shared_ptr<Particle> grain_t;
-    typedef std::vector<std::vector<grain_t>> grid_t;
+    using ParticlePtr = std::shared_ptr<Particle>;
+    using Grid = std::vector<std::vector<ParticlePtr>>;
 
-    grid_t grid_;       // storage of the sand grains
+    Grid grid_;       // storage of the sand grains
 
     void freeGrainsAbove(const sf::Vector2i& location); // Unblock the grains above a location from which a grain just left
 
