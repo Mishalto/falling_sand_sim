@@ -7,6 +7,7 @@
 
 #include <Particle.hpp>
 #include <Sand.hpp>
+#include <Water.hpp>
 #include <Constants/Constants.hpp>
 
 class ParticleManager {
@@ -29,7 +30,7 @@ public:
     // move the grains downwards one step
     void update();
     // add sand grain at position of mouse cursor
-    void add_particle(sf::Vector2i mouse_pos);
+    void add_particle(sf::Vector2i mouse_pos, std::string_view button);
     // draw all the sand grains
     void draw(sf::RenderWindow& window);
 };
