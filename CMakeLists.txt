@@ -24,5 +24,3 @@ target_include_directories(falling_sand_sim PRIVATE include)
 target_include_directories(falling_sand_sim PRIVATE include/Particle)
 
 target_link_libraries(falling_sand_sim PRIVATE SFML::Graphics)
-
-# target_compile_options(falling_sand_sim PRIVATE -Wall -Wextra -Werror)
