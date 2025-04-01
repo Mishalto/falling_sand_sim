@@ -15,7 +15,7 @@ class Particle {
         // Constructor, sets position
         Particle(const sf::Vector2i& coord);
         // Moves the particle (must be implemented)
-        virtual void is_move(std::vector<std::vector<std::shared_ptr<Particle>>>& grid) = 0;
+        virtual void update(std::vector<std::vector<std::shared_ptr<Particle>>>& grid) = 0;
         // Returns the shape
         sf::RectangleShape& get_part();
         // Returns the position

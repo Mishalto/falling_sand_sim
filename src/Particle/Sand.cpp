@@ -9,7 +9,7 @@ Sand::Sand(const sf::Vector2i& coord) : Particle(coord) {
 }
 
 // Moves the sand particle in the specified direction (implements sand movement logic)
-void Sand::is_move(GridPtr& grid) {
+void Sand::update(GridPtr& grid) {
     sf::Vector2i cd = get_coord();
     // Check out of bounds
     if (cd.y + 1 >= grid.size()) {
@@ -20,7 +20,6 @@ void Sand::is_move(GridPtr& grid) {
     if (bottom_is_free(grid, cd)) {
         move({0, 1});   // To bottom
         grid[cd.y + 1][cd.x] = std::move(grid[cd.y][cd.x]);
-        std::cout << get_coord().y << " " << get_coord().x << '\n';
     } else if (bottom_right_is_free(grid, cd)) {
         move({1, 0});   // To right
         grid[cd.y][cd.x + 1] = std::move(grid[cd.y][cd.x]);

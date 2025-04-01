@@ -7,11 +7,11 @@
 namespace Resolution {
     constexpr int width = 800;  // Defines the screen width in pixels
     constexpr int height = 600; // Defines the screen height in pixels
-    constexpr int fps = 5; // Defines the target frames per second (fps)
+    constexpr int fps = 15; // Defines the target frames per second (fps)
 }
 
 namespace ParticleStats {
-    constexpr float size = 20;   // Defines the size of a single grain of sand in pixels
+    constexpr float size = 10;   // Defines the size of a single grain of sand in pixels
     constexpr sf::Vector2f size_2f = {size, size};  // Represents the size as a 2D vector (used for rendering)
 }
 

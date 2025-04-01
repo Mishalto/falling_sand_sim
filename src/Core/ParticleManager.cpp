@@ -10,14 +10,12 @@ void ParticleManager::update() {
     for (int krow = grid_.size() - 1; krow >= 0; krow--) {
         for (auto& part : grid_[krow]) {
             // Skip empty cells
-            if (part == nullptr) { continue; }
-            // Skip particles that are already at rest
-            if (part->is_at_rest()) { continue; }
+            // if (part == nullptr) { continue; }
 
             // Get current particle position
             sf::Vector2i cd = part->get_coord();
 
-            part->is_move(grid_);
+            part->update(grid_);
         }
     }
 }
