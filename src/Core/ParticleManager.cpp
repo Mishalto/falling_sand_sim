@@ -8,27 +8,32 @@ void ParticleManager::update() {
     // loop over all the rows of sand grains
     // we start at the bottom because a grain moving my liberate grains higher up
     for (int krow = grid_.size() - 1; krow >= 0; krow--) {
-        for (auto& part : grid_[krow]) {               // loop over the grains in the row
-            if (part == nullptr) { continue; }         // check that location holds a grain
-            if (part->is_at_rest()) { continue; }      // check that grain is not blocked
+        for (auto& part : grid_[krow]) {
+            // skip empty cells
+            if (part == nullptr) { continue; }
+            // Skip particles that are already at rest
+            if (part->is_at_rest()) { continue; }
 
-            sf::Vector2i cd = part->get_coord();       // current location
-            // the grain is resting on the bottom of the grid
+            // Get current particle position
+            sf::Vector2i cd = part->get_coord();
+            // // Skip if particle is at the bottom (out of bounds)
             if (cd.y + s >= grid_.size()) {
                 part->set_at_rest(true);
                 continue;
             }
+            // Track if particle has moved
             bool fMoved = false;
-            if(part->move(grid_)) {
-                fMoved = true;
-            }
-
+            if (part->move(grid_)) { fMoved = true; }
+            // If particle moved, free particles above it
+            // Else mark particle as at rest if it didn't move
             if (fMoved) {
                 free_grains_above(cd);
             } else {
                 part->set_at_rest(true);
             }
-    }}}
+        }
+    }
+}
 // Grain is created using the mouse pos
 // Convert the mouse position to grid coordinates.
 void ParticleManager::add_particle(sf::Vector2i mouse_pos) {
