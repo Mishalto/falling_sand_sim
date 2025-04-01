@@ -44,18 +44,14 @@ void ParticleManager::update() {    // move all sand grains that are free to fal
     }
 }
 
-void ParticleManager::add_particle(sf::Vector2i mouse_pos) {        // Grain is created using the mouse pos
-    sf::Vector2i grid_pos = {                                       // Convert the mouse position to grid coordinates.
+void ParticleManager::add_particle(sf::Vector2i mouse_pos) {            // Grain is created using the mouse pos
+    sf::Vector2i grid_pos = {                                           // Convert the mouse position to grid coordinates.
         static_cast<int>(mouse_pos.x / ParticleStats::size),
         static_cast<int>(mouse_pos.y / ParticleStats::size)};
 
-    if (grid_[grid_pos.y][grid_pos.x] != nullptr)                   // check that there is no grain already at this position
+    if (grid_[grid_pos.y][grid_pos.x] != nullptr)                       // check that there is no grain already at this position
         return;
     grid_[grid_pos.y][grid_pos.x] = ParticlePtr(new Sand(grid_pos));    // construct the grain
-}
-
-void ParticleManager::draw(sf::RenderWindow &window) {
-    for (auto &row : grid_) for (auto grain : row) if (grain != nullptr) { window.draw(grain->get_part()); }
 }
 
 void ParticleManager::freeGrainsAbove(const sf::Vector2i& location) {
@@ -74,4 +70,8 @@ void ParticleManager::freeGrainsAbove(const sf::Vector2i& location) {
         if (n != nullptr)
             n->set_at_rest(false);
     }
+}
+
+void ParticleManager::draw(sf::RenderWindow &window) {
+    for (auto &row : grid_) for (auto grain : row) if (grain != nullptr) { window.draw(grain->get_part()); }
 }

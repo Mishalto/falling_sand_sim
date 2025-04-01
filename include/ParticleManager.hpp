@@ -17,7 +17,6 @@ private:
     Grid grid_;       // storage of the sand grains
 
     void freeGrainsAbove(const sf::Vector2i& location); // Unblock the grains above a location from which a grain just left
-
 public:
     ParticleManager();
 
