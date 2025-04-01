@@ -16,14 +16,14 @@ void ParticleManager::update() {
 
             // Get current particle position
             sf::Vector2i cd = part->get_coord();
-            // // Skip if particle is at the bottom (out of bounds)
-            if (cd.y + s >= grid_.size()) {
-                part->set_at_rest(true);
-                continue;
-            }
+
             // Track if particle has moved
             bool fMoved = false;
-            if (part->is_move(grid_)) { fMoved = true; }
+            if (part->is_move(grid_)) {
+                fMoved = true;
+            } else {
+                part->set_at_rest(true);
+            }
             // If particle moved, free particles above it
             // Else mark particle as at rest if it didn't move
             if (fMoved) {
