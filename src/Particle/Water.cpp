@@ -16,21 +16,17 @@ void Water::update(GridPtr& grid) {
     if (bottom_is_free(grid, cd)) {
         move({0, 1});   // To bottom
         grid[cd.y + 1][cd.x] = std::move(grid[cd.y][cd.x]);
-        grid[cd.y][cd.x]->set_is_move(true);
     } else if (bottom_right_is_free(grid, cd)) {
         move({1, 0});   // To right
         grid[cd.y][cd.x + 1] = std::move(grid[cd.y][cd.x]);
-        grid[cd.y][cd.x]->set_is_move(true);
         std::cout << "block2\n";
     } else if (bottom_left_is_free(grid, cd)) {
         move({-1, 0});  // To left
         grid[cd.y][cd.x - 1] = std::move(grid[cd.y][cd.x]);
-        grid[cd.y][cd.x]->set_is_move(true);
         std::cout << "block3\n";
     } else if (cd.x + 1 < grid[0].size() && grid[cd.y][cd.x + 1] == nullptr) {
         move({1, 0});
         grid[cd.y][cd.x + 1] = std::move(grid[cd.y][cd.x]);
-        grid[cd.y][cd.x]->set_is_move(true);
         std::cout << "block4\n";
     }
 }
@@ -53,4 +49,5 @@ void Water::move(const sf::Vector2i& dir) {
     get_part().move({dir.x * ParticleStats::size, dir.y * ParticleStats::size});
     get_coord().x += dir.x;
     get_coord().y += dir.y;
+    set_is_move(true);
 }
