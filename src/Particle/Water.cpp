@@ -19,15 +19,12 @@ void Water::update(GridPtr& grid) {
     } else if (bottom_right_is_free(grid, cd)) {
         move({1, 0});   // To right
         grid[cd.y][cd.x + 1] = std::move(grid[cd.y][cd.x]);
-        std::cout << "block2\n";
     } else if (bottom_left_is_free(grid, cd)) {
         move({-1, 0});  // To left
         grid[cd.y][cd.x - 1] = std::move(grid[cd.y][cd.x]);
-        std::cout << "block3\n";
     } else if (cd.x + 1 < grid[0].size() && grid[cd.y][cd.x + 1] == nullptr) {
         move({1, 0});
         grid[cd.y][cd.x + 1] = std::move(grid[cd.y][cd.x]);
-        std::cout << "block4\n";
     }
 }
 

@@ -73,4 +73,4 @@ void ParticleManager::draw(sf::RenderWindow &window) {
                     grain->set_is_move(false);
                 }
             }
-}
+}   
