@@ -10,6 +10,7 @@ class Particle {
         sf::Vector2i coordinate_;
         // True if particle is not moving
         bool is_at_rest_;
+        bool is_moved_;
 
     public:
         // Constructor, sets position
@@ -24,4 +25,8 @@ class Particle {
         void set_at_rest(bool cond);
         // Checks if at rest
         bool is_at_rest() const;
+
+        void set_is_move(bool cond);
+
+        bool is_moved() const;
     };

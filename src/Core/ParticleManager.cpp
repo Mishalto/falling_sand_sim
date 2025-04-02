@@ -9,9 +9,10 @@ void ParticleManager::update() {
     // we start at the bottom because a grain moving my liberate grains higher up
     for (int krow = grid_.size() - 1; krow >= 0; krow--) {
         for (auto& part : grid_[krow]) {
+            part->set_is_move(false);
             // Skip empty cells
             if (part == nullptr) { continue; }
-
+            if (part->is_moved()) { continue; }
             // Get current particle position
             sf::Vector2i cd = part->get_coord();
 
