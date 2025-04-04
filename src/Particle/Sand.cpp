@@ -28,6 +28,8 @@ void Sand::update(GridPtr& grid) {
     } else if (bottom_left_is_free(grid, cd)) {
         move({-1, 1});  // To left
         grid[cd.y + 1][cd.x - 1] = std::move(grid[cd.y][cd.x]);
+    } else {
+        set_at_rest(true);
     }
 }
 

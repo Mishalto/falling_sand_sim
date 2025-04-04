@@ -4,26 +4,25 @@ ParticleManager::ParticleManager() : grid_(GridData::y_cells, std::vector<Partic
 
 // move all sand grains that are free to fall downwards
 void ParticleManager::update() {
-    static constexpr int s = 1;     // s - step
+    static constexpr int s = 1;  // s - step
     // loop over all the rows of sand grains
     // we start at the bottom because a grain moving my liberate grains higher up
     for (int krow = grid_.size() - 1; krow >= 0; krow--) {
         for (auto& part : grid_[krow]) {
-            // Skip empty cells
-            if (part == nullptr) { continue; }
+            // Skip empty and rest cells
+            if (part == nullptr) {
+                continue;
+            }
+            if (part->is_at_rest()) {
+                continue;
+            }
 
             // Get current particle position
             sf::Vector2i cd = part->get_coord();
 
-            if(!part->is_moved())
-            part->update(grid_);
-        }
-    }
-
-    for (auto& s : grid_) {
-        for (auto& j : s) {
-            if (j != nullptr)
-            j->set_is_move(false);
+            if (!part->is_moved()) {
+                part->update(grid_);
+            }
         }
     }
 }
@@ -76,6 +75,8 @@ void ParticleManager::draw(sf::RenderWindow &window) {
             if (grain != nullptr)
             {
                 window.draw(grain->get_part());
+                if (grain->is_moved())
+                grain->set_is_move(false);
             }
 }
 
