@@ -1,12 +1,16 @@
 #pragma once
 
 #include <Particle.hpp>
+#include <ParticleType.hpp>
+#include <Directions.hpp>
 #include <Constants/Constants.hpp>
 
 class Water : public Particle {
     using GridPtr = std::vector<std::vector<std::shared_ptr<Particle>>>;
 
     private:
+        Directions flow_dir;
+
         void move(const sf::Vector2i& dir);
 
         bool bottom_is_free(const GridPtr& grid, const sf::Vector2i& cd) const;

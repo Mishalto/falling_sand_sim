@@ -6,6 +6,7 @@ Sand::Sand(const sf::Vector2i& coord) : Particle(coord) {
     get_part().setSize(ParticleStats::size_2f);
     get_part().setFillColor(sf::Color(194, 178, 128));  // RGB combination for sand color
     get_part().setPosition(calc_cd);
+    set_type(ParticleType::Sand);
 }
 
 // Moves the sand particle in the specified direction (implements sand movement logic)
@@ -37,7 +38,7 @@ void Sand::move(const sf::Vector2i& dir) {
 
 // Checking availability of the bottom, bottom-left, and bottom-right.
 bool Sand::bottom_is_free(const GridPtr& grid, const sf::Vector2i& cd) const {
-    return grid[cd.y + 1][cd.x] == nullptr;
+    return grid[cd.y + 1][cd.x] == nullptr || grid[cd.y + 1][cd.x]->get_type() == ParticleType::Water;
 }
 bool Sand::bottom_right_is_free(const GridPtr& grid, const sf::Vector2i& cd) const {
     return cd.x + 1 < grid[0].size() && grid[cd.y][cd.x + 1] == nullptr &&

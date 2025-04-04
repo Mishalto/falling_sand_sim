@@ -2,6 +2,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include <ParticleType.hpp>
+
 class Particle {
     using GridPtr = std::vector<std::vector<std::shared_ptr<Particle>>>;
     private:
@@ -9,6 +11,8 @@ class Particle {
         sf::RectangleShape particle_;
         // Particle position
         sf::Vector2i coordinate_;
+        // Type of Part
+        ParticleType type_;
         // True if particle is not moving
         bool is_at_rest_;
         bool is_moved_;
@@ -30,4 +34,7 @@ class Particle {
         void set_is_move(bool cond);
 
         bool is_moved() const;
+
+        void set_type(ParticleType type);
+        ParticleType get_type() const;
     };
