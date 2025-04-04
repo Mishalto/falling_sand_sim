@@ -21,12 +21,13 @@ void Sand::update(GridPtr& grid) {
     if (bottom_is_free(grid, cd)) {
         move({0, 1});   // To bottom
         grid[cd.y + 1][cd.x] = std::move(grid[cd.y][cd.x]);
+
     } else if (bottom_right_is_free(grid, cd)) {
         move({1, 1});   // To right
-        grid[cd.y][cd.x + 1] = std::move(grid[cd.y][cd.x]);
+        grid[cd.y + 1][cd.x + 1] = std::move(grid[cd.y][cd.x]);
     } else if (bottom_left_is_free(grid, cd)) {
         move({-1, 1});  // To left
-        grid[cd.y][cd.x - 1] = std::move(grid[cd.y][cd.x]);
+        grid[cd.y + 1][cd.x - 1] = std::move(grid[cd.y][cd.x]);
     }
 }
 
@@ -38,13 +39,17 @@ void Sand::move(const sf::Vector2i& dir) {
 
 // Checking availability of the bottom, bottom-left, and bottom-right.
 bool Sand::bottom_is_free(const GridPtr& grid, const sf::Vector2i& cd) const {
-    return grid[cd.y + 1][cd.x] == nullptr || grid[cd.y + 1][cd.x]->get_type() == ParticleType::Water;
+    return (grid[cd.y + 1][cd.x] == nullptr) || (grid[cd.y + 1][cd.x]->get_type() == ParticleType::Water);
 }
 bool Sand::bottom_right_is_free(const GridPtr& grid, const sf::Vector2i& cd) const {
     return (cd.x + 1 < grid[0].size() && grid[cd.y][cd.x + 1] == nullptr &&
-           grid[cd.y + 1][cd.x + 1] == nullptr);
+           grid[cd.y + 1][cd.x + 1] == nullptr) ||
+           (cd.x + 1 < grid[0].size() && grid[cd.y][cd.x + 1] != nullptr && grid[cd.y][cd.x + 1]->get_type() == ParticleType::Water &&
+           grid[cd.y + 1][cd.x + 1] != nullptr && grid[cd.y + 1][cd.x + 1]->get_type() == ParticleType::Water);
 }
 bool Sand::bottom_left_is_free(const GridPtr& grid, const sf::Vector2i& cd) const {
-    return cd.x - 1 >= 0 && grid[cd.y][cd.x - 1] == nullptr &&
-           grid[cd.y + 1][cd.x - 1] == nullptr;
+    return (cd.x - 1 >= 0 && grid[cd.y][cd.x - 1] == nullptr &&
+           grid[cd.y + 1][cd.x - 1] == nullptr) || 
+           (cd.x - 1 >= 0 && grid[cd.y][cd.x - 1] != nullptr && grid[cd.y][cd.x - 1]->get_type() == ParticleType::Water &&
+            grid[cd.y + 1][cd.x - 1] != nullptr && grid[cd.y + 1][cd.x - 1]->get_type() == ParticleType::Water);
 }
