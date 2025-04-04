@@ -7,7 +7,6 @@ Engine::Engine() : window_(sf::VideoMode({Resolution::width, Resolution::height}
 void Engine::start() {
     while (window_.isOpen()) {
         check_events();
-        update();
         draw();
     }
 }
@@ -39,6 +38,12 @@ void Engine::check_events() {
         {
             particle_pool.add_particle(sf::Mouse::getPosition(window_), "right");
         }
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
+        update();
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Z)) {
+        particle_pool.print_grid();
     }
 }
 

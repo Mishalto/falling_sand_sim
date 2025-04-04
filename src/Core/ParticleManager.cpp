@@ -19,6 +19,13 @@ void ParticleManager::update() {
             part->update(grid_);
         }
     }
+
+    for (auto& s : grid_) {
+        for (auto& j : s) {
+            if (j != nullptr)
+            j->set_is_move(false);
+        }
+    }
 }
 // Grain is created using the mouse pos
 // Convert the mouse position to grid coordinates.
@@ -69,8 +76,16 @@ void ParticleManager::draw(sf::RenderWindow &window) {
             if (grain != nullptr)
             {
                 window.draw(grain->get_part());
-                if (grain->is_moved()) {
-                    grain->set_is_move(false);
-                }
             }
-}   
+}
+
+void ParticleManager::print_grid() const {
+    for (const auto& s : grid_) {
+        for (const auto& j : s) {
+            if (j != nullptr)
+            std::cout << 1 << '\n';
+            else
+            std::cout << "0";
+        }
+    }
+}

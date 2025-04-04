@@ -33,4 +33,6 @@ public:
     void add_particle(sf::Vector2i mouse_pos, std::string_view button);
     // draw all the sand grains
     void draw(sf::RenderWindow& window);
+
+    void print_grid() const;
 };
