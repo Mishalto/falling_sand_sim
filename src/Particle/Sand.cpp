@@ -22,12 +22,12 @@ void Sand::update(GridPtr& grid) {
         move({0, 1});   // To bottom
         grid[cd.y + 1][cd.x] = std::move(grid[cd.y][cd.x]);
     } else if (bottom_right_is_free(grid, cd)) {
-        move({1, 0});   // To right
+        move({1, 1});   // To right
         grid[cd.y][cd.x + 1] = std::move(grid[cd.y][cd.x]);
     } else if (bottom_left_is_free(grid, cd)) {
-        move({-1, 0});  // To left
+        move({-1, 1});  // To left
         grid[cd.y][cd.x - 1] = std::move(grid[cd.y][cd.x]);
-    } else { set_at_rest(true); }
+    }
 }
 
 // Move the particle in the given direction
@@ -41,8 +41,8 @@ bool Sand::bottom_is_free(const GridPtr& grid, const sf::Vector2i& cd) const {
     return grid[cd.y + 1][cd.x] == nullptr || grid[cd.y + 1][cd.x]->get_type() == ParticleType::Water;
 }
 bool Sand::bottom_right_is_free(const GridPtr& grid, const sf::Vector2i& cd) const {
-    return cd.x + 1 < grid[0].size() && grid[cd.y][cd.x + 1] == nullptr &&
-           grid[cd.y + 1][cd.x + 1] == nullptr;
+    return (cd.x + 1 < grid[0].size() && grid[cd.y][cd.x + 1] == nullptr &&
+           grid[cd.y + 1][cd.x + 1] == nullptr);
 }
 bool Sand::bottom_left_is_free(const GridPtr& grid, const sf::Vector2i& cd) const {
     return cd.x - 1 >= 0 && grid[cd.y][cd.x - 1] == nullptr &&

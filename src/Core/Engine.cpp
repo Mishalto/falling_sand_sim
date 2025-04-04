@@ -7,6 +7,7 @@ Engine::Engine() : window_(sf::VideoMode({Resolution::width, Resolution::height}
 void Engine::start() {
     while (window_.isOpen()) {
         check_events();
+        update();
         draw();
     }
 }

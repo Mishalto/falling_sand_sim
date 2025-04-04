@@ -3,7 +3,7 @@
 #include <iostream> // DELETE AFTER FIX!!!!!!!!!!!!!!!!
 
 // The constructor initializes the sand particle with default values, determining its position based on the given coordinates (mouse coordinates).
-Water::Water(const sf::Vector2i& coord) : Particle(coord), flow_dir(Directions::stopped) {
+Water::Water(const sf::Vector2i& coord) : Particle(coord), flow_dir(Directions::undefined) {
     sf::Vector2f calc_cd = {coord.x * ParticleStats::size, coord.y * ParticleStats::size};
     get_part().setSize(ParticleStats::size_2f);
     get_part().setFillColor(sf::Color(sf::Color::Blue));
@@ -28,24 +28,31 @@ void Water::update(GridPtr& grid) {
         return;
     }
 
-    if (!is_moved()) {
-        if (cd.x + 1 < grid[0].size() && grid[cd.y][cd.x + 1] == nullptr && flow_dir != Directions::left) {
+    if (!is_moved() && flow_dir == Directions::undefined) {
+        if (cd.x + 1 < grid[0].size() && grid[cd.y][cd.x + 1] == nullptr) {
             flow_dir = Directions::right;
-        } else if (cd.x - 1 >= 0 && grid[cd.y][cd.x - 1] == nullptr && flow_dir != Directions::right) {
+        } else if (cd.x - 1 >= 0 && grid[cd.y][cd.x - 1] == nullptr) {
             flow_dir = Directions::left;
         }
+    }
 
-        cd = get_coord();
-        if (flow_dir == Directions::right &&
-            cd.x + 1 < grid[0].size() && grid[cd.y][cd.x + 1] == nullptr) {
-            move({1, 0});
-            grid[cd.y][cd.x + 1] = std::move(grid[cd.y][cd.x]);
-        } else if (flow_dir == Directions::left &&
-                   cd.x - 1 >= 0 && grid[cd.y][cd.x - 1] == nullptr) {
-            move({-1, 0});
-            grid[cd.y][cd.x - 1] = std::move(grid[cd.y][cd.x]);
-        } else {
-            flow_dir = Directions::stopped;
+    if (cd.x + 1 < grid[0].size() && grid[cd.y][cd.x + 1] == nullptr && flow_dir == Directions::right) {
+        move({1, 0});
+        grid[cd.y][cd.x + 1] = std::move(grid[cd.y][cd.x]);
+    } else if (cd.x - 1 >= 0 && grid[cd.y][cd.x - 1] == nullptr && flow_dir == Directions::left) {
+        move({-1, 0});
+        grid[cd.y][cd.x - 1] = std::move(grid[cd.y][cd.x]);
+    } else if (cd.y + 1 < grid.size() - 1) {
+        for (size_t i = 0; i < grid[0].size(); ++i) {
+            if (grid[cd.y + 1][0 + i] != nullptr) { continue; }
+
+            if (cd.x - 1 >= 0 && grid[cd.y][cd.x - 1] == nullptr) {
+                move({-1, 0});
+                grid[cd.y][cd.x - 1] = std::move(grid[cd.y][cd.x]);
+            } else if (cd.x + 1 < grid[0].size() && grid[cd.y][cd.x + 1] == nullptr) {
+                move({1, 0});
+                grid[cd.y][cd.x + 1] = std::move(grid[cd.y][cd.x]);
+            }
         }
     }
 }
