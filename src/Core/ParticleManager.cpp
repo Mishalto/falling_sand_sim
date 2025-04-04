@@ -82,10 +82,12 @@ void ParticleManager::draw(sf::RenderWindow &window) {
 void ParticleManager::print_grid() const {
     for (const auto& s : grid_) {
         for (const auto& j : s) {
-            if (j != nullptr)
-            std::cout << 1 << '\n';
-            else
-            std::cout << "0";
+            if (j != nullptr) {
+                std::cout << 1 << " ";
+            } else {
+                std::cout << 0 << " ";
+            }
         }
+        std::cout << '\n';
     }
 }
