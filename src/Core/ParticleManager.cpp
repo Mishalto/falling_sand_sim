@@ -13,12 +13,6 @@ void ParticleManager::update() {
             if (part == nullptr) {
                 continue;
             }
-            if (part->is_at_rest()) {
-                continue;
-            }
-
-            // Get current particle position
-            sf::Vector2i cd = part->get_coord();
 
             if (!part->is_moved()) {
                 part->update(grid_);

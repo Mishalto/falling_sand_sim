@@ -77,7 +77,7 @@ bool Sand::bottom_left_is_free(const GridPtr& grid) {
         return false;
     }
     // Check if bottom-left is free
-    if (grid[cd.y - 1][cd.x - 1] == nullptr) {
+    if (grid[cd.y + 1][cd.x - 1] == nullptr) {
         return true;
     }
     // Check if bottom-left is water
