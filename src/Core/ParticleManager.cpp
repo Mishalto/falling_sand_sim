@@ -9,11 +9,11 @@ void ParticleManager::update() {
     // we start at the bottom because a grain moving my liberate grains higher up
     for (int krow = grid_.size() - 1; krow >= 0; krow--) {
         for (auto& part : grid_[krow]) {
-            // Skip empty and rest cells
+            // Skip empty
             if (part == nullptr) {
                 continue;
             }
-
+            // Skip moved
             if (!part->is_moved()) {
                 part->update(grid_);
             }
@@ -72,6 +72,7 @@ void ParticleManager::draw(sf::RenderWindow &window) {
             }
 }
 
+// delete after finish
 void ParticleManager::print_grid() const {
     for (const auto& s : grid_) {
         for (const auto& j : s) {
