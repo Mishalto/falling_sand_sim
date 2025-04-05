@@ -73,7 +73,7 @@ bool Sand::bottom_right_is_free(const GridPtr& grid) {
 bool Sand::bottom_left_is_free(const GridPtr& grid) {
     const auto cd = get_coord();
     // Check out of bounds
-    if (cd.y - 1 < 0 || cd.x - 1 < 0) {
+    if (cd.y + 1 >= grid.size() || cd.x - 1 < 0) {
         return false;
     }
     // Check if bottom-left is free
@@ -81,7 +81,7 @@ bool Sand::bottom_left_is_free(const GridPtr& grid) {
         return true;
     }
     // Check if bottom-left is water
-    else if ((grid[cd.y - 1][cd.x - 1]->get_type() == ParticleType::Water)) {
+    else if ((grid[cd.y + 1][cd.x - 1]->get_type() == ParticleType::Water)) {
         return true;
     }
 
