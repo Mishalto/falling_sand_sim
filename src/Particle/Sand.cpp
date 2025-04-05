@@ -13,21 +13,21 @@ Sand::Sand(const sf::Vector2i& coord) : Particle(coord) {
 void Sand::update(GridPtr& grid) {
     sf::Vector2i cd = get_coord();
     // Check out of bounds
-    if (cd.y + 1 >= grid.size()) {
-        set_at_rest(true);
-        return;
-    }
+    if (cd.y + 1 >= grid.size()) { return; }
+
     // Check all directions
     if (bottom_is_free(grid)) {
         move({0, 1});   // To bottom
         grid[cd.y + 1][cd.x] = std::move(grid[cd.y][cd.x]);
-
+        grid[cd.y][cd.x] = nullptr;
     } else if (bottom_right_is_free(grid)) {
         move({1, 1});   // To right
         grid[cd.y + 1][cd.x + 1] = std::move(grid[cd.y][cd.x]);
+        grid[cd.y][cd.x] = nullptr;
     } else if (bottom_left_is_free(grid)) {
         move({-1, 1});  // To left
         grid[cd.y + 1][cd.x - 1] = std::move(grid[cd.y][cd.x]);
+        grid[cd.y][cd.x] = nullptr;
     }
 }
 

@@ -37,8 +37,6 @@ void ParticleManager::add_particle(sf::Vector2i mouse_pos, std::string_view butt
         return;
     if (button == "left") {
         grid_[grid_pos.y][grid_pos.x] = ParticlePtr(new Sand(grid_pos));    // construct the grain
-    } else if (button == "right") {
-        grid_[grid_pos.y][grid_pos.x] = ParticlePtr(new Water(grid_pos));
     }
 }
 
