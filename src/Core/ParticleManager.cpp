@@ -13,7 +13,7 @@ void ParticleManager::update() {
             if (part == nullptr) {
                 continue;
             }
-            // Skip moved
+            // Skip moved particular
             if (!part->is_moved()) {
                 part->update(grid_);
             }
