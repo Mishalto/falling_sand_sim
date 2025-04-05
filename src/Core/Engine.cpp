@@ -1,4 +1,4 @@
-#include <Engine.hpp>
+#include <Core/Engine.hpp>
 
 Engine::Engine() : window_(sf::VideoMode({Resolution::width, Resolution::height}), "Falling Sand Simulator", sf::Style::None) {
     window_.setFramerateLimit(Resolution::fps);

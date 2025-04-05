@@ -1,4 +1,4 @@
-#include <ParticleManager.hpp>
+#include <Core/ParticleManager.hpp>
 
 ParticleManager::ParticleManager() : grid_(GridData::y_cells, std::vector<ParticlePtr>(GridData::x_cells)) {}
 
