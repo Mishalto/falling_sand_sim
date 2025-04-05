@@ -28,6 +28,6 @@ public:
     void add_particle(sf::Vector2i mouse_pos, Type type);
     // draw all the sand grains
     void draw(sf::RenderWindow& window);
-
+    // delete after finish
     void print_grid() const;
 };
