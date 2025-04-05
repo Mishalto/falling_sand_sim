@@ -15,9 +15,9 @@ class Sand : public Particle {
     private:
         void move(const sf::Vector2i& dir);
 
-        bool bottom_is_free(const GridPtr& grid, const sf::Vector2i& cd) const;
-        bool bottom_right_is_free(const GridPtr& grid, const sf::Vector2i& cd) const;
-        bool bottom_left_is_free(const GridPtr& grid, const sf::Vector2i& cd) const;
+        bool bottom_is_free(const GridPtr& grid);
+        bool bottom_right_is_free(const GridPtr& grid);
+        bool bottom_left_is_free(const GridPtr& grid);
     public:
         // Constructor that initializes sand at the given coordinates (calls base class constructor)
         Sand(const sf::Vector2i& coord);
