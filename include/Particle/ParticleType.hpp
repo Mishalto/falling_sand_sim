@@ -2,7 +2,7 @@
 
 #include <cstdint>
 
-enum class ParticleType : uint8_t {
+enum class Type : uint8_t {
     Sand,
     Water
 };

@@ -12,7 +12,7 @@ class Particle {
         // Particle position
         sf::Vector2i coordinate_;
         // Type of Part
-        ParticleType type_;
+        Type type_;
         // True if particle is not moving
         bool is_at_rest_;
         bool is_moved_;
@@ -35,6 +35,6 @@ class Particle {
 
         bool is_moved() const;
 
-        void set_type(ParticleType type);
-        ParticleType get_type() const;
+        void set_type(Type type);
+        Type get_type() const;
     };

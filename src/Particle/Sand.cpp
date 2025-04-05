@@ -6,7 +6,7 @@ Sand::Sand(const sf::Vector2i& coord) : Particle(coord) {
     get_part().setSize(ParticleStats::size_2f);
     get_part().setFillColor(sf::Color(194, 178, 128));  // RGB combination for sand color
     get_part().setPosition(calc_cd);
-    set_type(ParticleType::Sand);
+    set_type(Type::Sand);
 }
 
 // Moves the sand particle in the specified direction (implements sand movement logic)
@@ -45,7 +45,7 @@ bool Sand::bottom_is_free(const GridPtr& grid) {
         return true;
     }
     // Check if bottom cell is water
-    else if (grid[cd.y + 1][cd.x]->get_type() == ParticleType::Water) {
+    else if (grid[cd.y + 1][cd.x]->get_type() == Type::Water) {
         return true;
     }
 
@@ -63,7 +63,7 @@ bool Sand::bottom_right_is_free(const GridPtr& grid) {
         return true;
     }
     // Check if bottom-right is water
-    else if (grid[cd.y + 1][cd.x + 1]->get_type() == ParticleType::Water) {
+    else if (grid[cd.y + 1][cd.x + 1]->get_type() == Type::Water) {
         return true;
     }
 
@@ -81,7 +81,7 @@ bool Sand::bottom_left_is_free(const GridPtr& grid) {
         return true;
     }
     // Check if bottom-left is water
-    else if ((grid[cd.y + 1][cd.x - 1]->get_type() == ParticleType::Water)) {
+    else if ((grid[cd.y + 1][cd.x - 1]->get_type() == Type::Water)) {
         return true;
     }
 

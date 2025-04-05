@@ -27,10 +27,10 @@ bool Particle::is_moved() const {
     return is_moved_;
 }
 
-void Particle::set_type(ParticleType type) {
+void Particle::set_type(Type type) {
     type_ = type;
 }
 
-ParticleType Particle::get_type() const {
+Type Particle::get_type() const {
     return type_;
 }
