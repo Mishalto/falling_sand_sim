@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include <ParticleType.hpp>
+#include <Type.hpp>
 
 class Particle {
     using GridPtr = std::vector<std::vector<std::shared_ptr<Particle>>>;
