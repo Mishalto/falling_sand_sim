@@ -18,19 +18,19 @@ void Particle::set_at_rest(bool cond) {
 bool Particle::is_at_rest() const {
     return is_at_rest_;
 }
-
+// Set is_moved_ variable based on the cond
 void Particle::set_is_move(bool cond) {
     is_moved_ = cond;
 }
-
+// Check is moved
 bool Particle::is_moved() const {
     return is_moved_;
 }
-
+// Set type based on func parameter
 void Particle::set_type(Type type) {
     type_ = type;
 }
-
+// Return particular type
 Type Particle::get_type() const {
     return type_;
 }
