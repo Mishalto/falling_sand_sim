@@ -22,14 +22,14 @@ void ParticleManager::update() {
 }
 // Grain is created using the mouse pos
 // Convert the mouse position to grid coordinates.
-void ParticleManager::add_particle(sf::Vector2i mouse_pos, std::string_view button) {
+void ParticleManager::add_particle(sf::Vector2i mouse_pos, Type type) {
     sf::Vector2i grid_pos = {
         static_cast<int>(mouse_pos.x / ParticleStats::size),
         static_cast<int>(mouse_pos.y / ParticleStats::size)};
 // check that there is no grain already at this position
     if (grid_[grid_pos.y][grid_pos.x] != nullptr)
         return;
-    if (button == "left") {
+    if (type == Type::Sand) {
         grid_[grid_pos.y][grid_pos.x] = ParticlePtr(new Sand(grid_pos));    // construct the grain
     }
 }

@@ -5,6 +5,7 @@
 
 #include <SFML/Graphics.hpp>
 
+#include <Type.hpp>
 #include <Particle.hpp>
 #include <Sand.hpp>
 #include <Constants/Constants.hpp>
@@ -29,7 +30,7 @@ public:
     // move the grains downwards one step
     void update();
     // add sand grain at position of mouse cursor
-    void add_particle(sf::Vector2i mouse_pos, std::string_view button);
+    void add_particle(sf::Vector2i mouse_pos, Type type);
     // draw all the sand grains
     void draw(sf::RenderWindow& window);
 
