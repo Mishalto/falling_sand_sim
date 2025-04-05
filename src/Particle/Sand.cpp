@@ -17,15 +17,18 @@ void Sand::update(GridPtr& grid) {
 
     // Check all directions
     if (bottom_is_free(grid)) {
-        move({0, 1});   // To bottom
+        // Move to bottom
+        move({0, 1});
         grid[cd.y + 1][cd.x] = std::move(grid[cd.y][cd.x]);
         grid[cd.y][cd.x] = nullptr;
     } else if (bottom_right_is_free(grid)) {
-        move({1, 1});   // To right
+        // Move to right-bottom
+        move({1, 1});
         grid[cd.y + 1][cd.x + 1] = std::move(grid[cd.y][cd.x]);
         grid[cd.y][cd.x] = nullptr;
     } else if (bottom_left_is_free(grid)) {
-        move({-1, 1});  // To left
+        // Move to left-bottom
+        move({-1, 1});
         grid[cd.y + 1][cd.x - 1] = std::move(grid[cd.y][cd.x]);
         grid[cd.y][cd.x] = nullptr;
     }
@@ -51,7 +54,7 @@ bool Sand::bottom_is_free(const GridPtr& grid) {
 
     return false;
 }
-// Cheking availability of the bottom-right
+// Checking availability of the bottom-right
 bool Sand::bottom_right_is_free(const GridPtr& grid) {
     const auto cd = get_coord();
     // Check out of bounds
@@ -69,7 +72,7 @@ bool Sand::bottom_right_is_free(const GridPtr& grid) {
 
     return false;
 }
-// Cheking availability of the bottom-right
+// Checking availability of the bottom-left
 bool Sand::bottom_left_is_free(const GridPtr& grid) {
     const auto cd = get_coord();
     // Check out of bounds

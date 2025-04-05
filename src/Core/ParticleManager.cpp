@@ -35,6 +35,7 @@ void ParticleManager::add_particle(sf::Vector2i mouse_pos, Type type) {
     }
 }
 
+// Unblock the grains above a location from which a grain just left
 void ParticleManager::free_grains_above(const sf::Vector2i& location) {
     // free grains that may have been blocked;
 
@@ -62,6 +63,7 @@ void ParticleManager::free_grains_above(const sf::Vector2i& location) {
     }
 }
 
+// draw all the sand grains
 void ParticleManager::draw(sf::RenderWindow &window) {
     for (auto &row : grid_)
         for (auto grain : row)
