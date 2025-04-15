@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include <ParticleManager.hpp>
+#include <Core/ParticleManager.hpp>
 #include <Constants/Constants.hpp>
 
 class Engine {

@@ -1,4 +1,4 @@
-#include <Engine.hpp>
+#include <Core/Engine.hpp>
 
 Engine::Engine() : window_(sf::VideoMode({Resolution::width, Resolution::height}), "Falling Sand Simulator", sf::Style::None) {
     window_.setFramerateLimit(Resolution::fps);
@@ -30,8 +30,14 @@ void Engine::check_events() {
         if(sf::Mouse::getPosition(window_).y < Resolution::height && sf::Mouse::getPosition(window_).y >= 0
         && sf::Mouse::getPosition(window_).x < Resolution::width && sf::Mouse::getPosition(window_).x >= 0)
         {
-            particle_pool.add_particle(sf::Mouse::getPosition(window_));
+            particle_pool.add_particle(sf::Mouse::getPosition(window_), Type::Sand);
         }
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
+        update();
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Z)) {
+        particle_pool.print_grid();
     }
 }
 
