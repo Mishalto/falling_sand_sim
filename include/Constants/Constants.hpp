@@ -7,7 +7,7 @@
 namespace Resolution {
     constexpr int width = 800;  // Defines the screen width in pixels
     constexpr int height = 600; // Defines the screen height in pixels
-    constexpr int fps = 10; // Defines the target frames per second (fps)
+    constexpr int fps = 60; // Defines the target frames per second (fps)
 }
 
 namespace ParticleStats {
